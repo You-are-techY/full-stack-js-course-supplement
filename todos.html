@@ -1,0 +1,99 @@
+<DOCTYPE HTML!>
+<html lang="eng">
+  <head>
+  </head>
+  <body>
+    <h2> Todos </h2>
+
+    <div id="todoList">
+      <!-- Todos inserted here with javascript  -->
+    </div>
+
+    <input id="newTodo" type="text"/>
+    <button onclick="addItem()">
+      Add item 
+    </button>
+    
+    <script type="text/javascript">
+
+      // array of todos
+      let todos = [];
+
+      // keep track of the count
+      let num = 1;
+
+      // define the HTML container we want to edit 
+      let container = document.getElementById("todoList");
+
+      // add new todo item
+      function addItem() {
+        let newTodo = {
+          text: document.getElementById("newTodo").value
+          , num: num
+          , isDone: false 
+          , createdDate: new Date()
+          , assignedTo: null 
+        }
+
+        // insert new todo into list
+        todos.push(newTodo); 
+
+        // reset the input field 
+        document.getElementById("newTodo").value = null; 
+
+        // increment the count by 1 
+        num++;
+
+        // check logs 
+        console.log(todos);
+
+        // re-render the entire list 
+        renderList();
+      }
+
+      function removeItem(i) {
+        // find the index of the todo we want to remove and remove it
+        todos.splice(i, 1);
+
+        // check logs 
+        console.log(todos);
+
+        // re-render the entire list 
+        renderList();
+      } 
+
+      // render the todo list
+      function renderList() {
+        // clear the inner HTML 
+        container.innerHTML = "";
+
+        // check for todos to render 
+        if(todos.length > 0) {
+          // if there are todos, show list 
+
+          // build the list container 
+          container.innerHTML += `<ul class="list">`
+
+          // add each todo as html list item 
+          for(let i = 0; i<todos.length; i++) {
+            container.innerHTML += `<li> 
+                                      ${todos[i].num}: ${todos[i].text} 
+                                      <small><em>created ${todos[i].createdDate.toLocaleString()} - </em></small> 
+                                      <button onclick="removeItem(${i})">Remove item</button>
+                                    </li>`
+          }
+          // close list container 
+          container.innerHTML += `</ul>`
+
+        } else {
+          // if no todos, show message 
+          container.innerHTML += `<em> No Todos!</em>`;
+        }
+      }
+    
+      // when the page loads the first time, render the todos list
+      window.onload(renderList())
+
+    </script>
+  </body>
+</html>
