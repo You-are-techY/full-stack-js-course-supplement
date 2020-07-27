@@ -4,7 +4,6 @@ const Item = ({
   , index
   , item 
 }) => {
-  // console.log("logging index", index);
   return (
     <li >
       <label>
@@ -19,5 +18,3 @@ const Item = ({
     </li>
   )
 } 
-
-export default Item;
