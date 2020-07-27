@@ -8,3 +8,5 @@ https://github.com/You-are-techY/full-stack-js-course-supplement/branches/all
 If you want to start following a lesson from a certain point in the video, checkout the relevant branch. 
 
 The source code for the finished application can be found in the "production" branch. 
+
+--
