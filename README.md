@@ -11,10 +11,8 @@ The source code for the finished application can be found in the "production" br
 
 -- 
 
-## Notes for Module 2 | Lesson 3 
+## Notes for Module 3 | Lesson 1
 
-To run locally you'll need to have [NodeJS](https://nodejs.org/en/) installed on your machine, and the [NPM Package "http-server"](https://www.npmjs.com/package/http-server) installed globally:
-```bash 
-$ npm install -g http-server 
-```
-This is a good package to have in general.  
+Make sure NodeJS is installed on your machine.  
+
+To install NPM packages globally on a mac, you may need to use `sudo`. 
