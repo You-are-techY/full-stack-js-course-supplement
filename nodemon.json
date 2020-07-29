@@ -1,0 +1,8 @@
+{
+  "verbose": false
+  , "ext": "js html json css"
+  , "ignore": [
+    "public"
+    , "node_modules"
+  ]
+}
