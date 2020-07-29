@@ -4,8 +4,16 @@ const port = 3030;
 const serveStatic = require('serve-static');
 const path = require('path');
 
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.get('/', (req, res) => console.log('send static directory'));
-
-
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+var finalhandler = require('finalhandler');
+var http = require('http');
+ 
+// Serve up public/ftp folder
+var serve = serveStatic('public', { 'index': ['index.html', 'index.htm'] })
+ 
+// Create server
+var server = http.createServer(function onRequest (req, res) {
+  serve(req, res, finalhandler(req, res))
+})
+ 
+// Listen
+server.listen(port);
