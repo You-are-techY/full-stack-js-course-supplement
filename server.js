@@ -1,19 +1,11 @@
-const http = require('http'); // this is part of Node
-const serveStatic = require('serve-static'); // npm install --save serve-static 
-const finalhandler = require('finalhandler'); // npm install --save finalhandler
+const express = require('express')
+const app = express();
 
 const port = 3030;
 const hostname = 'localhost'; 
 
-// Serve up public directory
-let serve = serveStatic('public', { 'index': ['index.html', 'index.htm'] })
- 
-// Create server
-let server = http.createServer((req, res) => {
-  serve(req, res, finalhandler(req, res));
-})
- 
-// Listen
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}`);
-});
+// setup a root GET request 
+app.get('/', (req, res) => res.send('Hello World! I am Express!!!'))
+
+// setup the server 
+app.listen(port, () => console.log(`Example app listening at http://${hostname}:${port}`))
