@@ -1,19 +1,17 @@
-const express = require('express');
-const app = express();
-const port = 3030;
-const serveStatic = require('serve-static');
-const path = require('path');
+const http = require('http'); // this is part of Node
 
-var finalhandler = require('finalhandler');
-var http = require('http');
- 
-// Serve up public/ftp folder
-var serve = serveStatic('public', { 'index': ['index.html', 'index.htm'] })
+const port = 3030;
+const hostname = 'localhost'; 
+
  
 // Create server
-var server = http.createServer(function onRequest (req, res) {
-  serve(req, res, finalhandler(req, res))
+let server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World');
 })
  
 // Listen
-server.listen(port);
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}`);
+});
