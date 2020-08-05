@@ -21,4 +21,4 @@ app.delete('/user', function (req, res) {
 })
 
 // setup the server 
-app.listen(port, () => console.log(`Example app listening at http://${hostname}:${port}`));
+app.listen(port, () => console.log(`Example app listening at http://${hostname}:${port}`)); 
