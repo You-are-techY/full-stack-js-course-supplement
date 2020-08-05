@@ -4,17 +4,21 @@ const app = express();
 const port = 3030;
 const hostname = 'localhost'; 
 
-/**
- * This tells Express to look at the '/public' directory when we get a root get request
- */
-// setup static files 
-app.use('/', express.static('public'));
+app.get('/', (req, res) => res.send('Hello World!'));
 
-// setup a root GET request 
-app.get('/', (req, res) => {
-  console.log('serving static files');
-  res.send('Hello World! Express is serving static files!');
-});
+app.post('/', function (req, res) {
+  res.send('Got a POST request')
+})
+
+// Respond to a PUT request to the /user route:
+app.put('/user', function (req, res) {
+  res.send('Got a PUT request at /user')
+})
+
+// Respond to a DELETE request to the /user route:
+app.delete('/user', function (req, res) {
+  res.send('Got a DELETE request at /user')
+})
 
 // setup the server 
 app.listen(port, () => console.log(`Example app listening at http://${hostname}:${port}`));
