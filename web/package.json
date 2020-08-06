@@ -1,0 +1,55 @@
+{
+  "name": "full-stack-js-course-supplement_web",
+  "version": "1.0.0",
+  "description": "React/Redux web client for full stack course ",
+  "main": "index.js",
+  "scripts": {
+    "watch": "webpack -d --progress --colors --watch",
+    "start": "webpack-dev-server --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/You-are-techY/full-stack-js-course-supplement.git"
+  },
+  "keywords": [
+    "React",
+    "Redux"
+  ],
+  "author": "Erik Guffrey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/You-are-techY/full-stack-js-course-supplement/issues"
+  },
+  "homepage": "https://github.com/You-are-techY/full-stack-js-course-supplement#readme",
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "es5-shim": "^4.5.14",
+    "history": "^5.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.19",
+    "luxon": "^1.24.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
