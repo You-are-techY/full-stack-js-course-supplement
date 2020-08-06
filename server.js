@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
+let serveStatic     = require('serve-static');
 
 const port = 3030;
 const hostname = 'localhost'; 
 
 // initialize db
 require('./db')();
+
+app.use(serveStatic(__dirname + '/public'));
 
 // configure server routes
 let router = express.Router();
