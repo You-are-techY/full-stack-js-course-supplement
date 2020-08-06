@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const hostname = 'localhost'; 
 const dbName = 'techy';
 
+let Todo = require('./models/Todo.js');
+
 module.exports = () => {
   mongoose.connect(`mongodb://${hostname}/${dbName}`, {useNewUrlParser: true});
   
@@ -12,21 +14,7 @@ module.exports = () => {
     // we're connected!
     console.log('mongo connected!');
   });
-  
-  const todoSchema = new mongoose.Schema({
-    text: { type: String },
-    done: { type: Boolean, default: false },
-  });
-  
-  const Todo = mongoose.model('Todo', todoSchema);
-  
-  const dummy = new Todo({text: 'test dummy todo'});
-  console.log(dummy);
-  dummy.save((err, dummy) => {
-    if(err) { 
-      return console.error(err); 
-    } else {
-      console.log('dummy saved as', dummy)
-    }
-  })
+
+  // when the server connect, create defaults 
+  Todo.createDefaults();
 }
