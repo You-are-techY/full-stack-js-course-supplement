@@ -1,8 +1,19 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 
 const port = 3030;
 const hostname = 'localhost'; 
+const dbName = 'techy';
+
+mongoose.connect(`mongodb://${hostname}:27017/${dbName}`, {useNewUrlParser: true});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  // we're connected!
+  console.log('mongo connected!');
+});
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
