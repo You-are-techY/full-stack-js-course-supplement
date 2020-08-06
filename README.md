@@ -13,6 +13,8 @@ The source code for the finished application can be found in the "production" br
 
 ## Notes for Module 3 | Lesson 1
 
-Make sure NodeJS is installed on your machine.  
+Make sure NodeJS & MongoDB are installed on your machine.  
 
-To install NPM packages globally on a mac, you may need to use `sudo`. 
+- **How to Install Node:** [https://nodejs.dev/learn/how-to-install-nodejs](https://nodejs.dev/learn/how-to-install-nodejs)
+
+_NOTE: To install NPM packages globally on a mac, you may need to use `$ sudo`._
