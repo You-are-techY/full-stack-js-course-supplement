@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const hostname = 'localhost'; 
 const dbName = 'techy';
 
-let Todo = require('./models/Todo.js');
+let Todo = require('./resources/todos/TodoModel.js');
 
 module.exports = () => {
   mongoose.connect(`mongodb://${hostname}/${dbName}`, {useNewUrlParser: true});
