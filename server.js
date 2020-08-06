@@ -7,8 +7,10 @@ const hostname = 'localhost';
 // initialize db
 require('./db')();
 
-// static routes
-app.get('/', (req, res) => res.send('Hello World!'));
+// configure server routes
+let router = express.Router();
+require('./router')(router, app);
+app.use('/', router);
 
 // setup the server 
 app.listen(port, () => console.log(`Example app listening at http://${hostname}:${port}`)); 
