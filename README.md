@@ -11,9 +11,20 @@ The source code for the finished application can be found in the "production" br
 
 -- 
 
-## Notes for Module 3 | Lesson 2
+## Notes for Module 4
 
-Make sure NodeJS & MongoDB are installed on your machine.  
+We're using some Senior Developer magic setup here with webpack and babel. 
 
-- **How to Install Node:** [https://nodejs.dev/learn/how-to-install-nodejs](https://nodejs.dev/learn/how-to-install-nodejs)
-- **How to Install Mongo:** [https://docs.mongodb.com/manual/administration/install-community/](https://docs.mongodb.com/manual/administration/install-community/)
+To run, open two terminal windows.  In the first:
+```bash 
+$ cd server 
+$ npm install
+$ nodemon server.js
+```
+And in the second:
+```bash
+$ cd web 
+$ npm install 
+$ npm run watch 
+```
+The app will be listening on `localhost:3030` as normal.  
