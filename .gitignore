@@ -4,4 +4,4 @@
 *.DS_Store
 TechY.code-workspace
 
-public/js/*
+server/public/js/*
