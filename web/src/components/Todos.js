@@ -76,7 +76,7 @@ class Todos extends React.Component {
   }
   
   _handleCheckbox(e, index) {
-    console.log('fire check')
+    console.log('fire check', e.target.checked)
     let newState = {...this.state};
     // newState.items[index].done = e.target.checked;
     // this.setState(newState);
