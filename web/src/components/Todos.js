@@ -54,7 +54,7 @@ class Todos extends React.Component {
       text: this.state.newItemText
       , done: false 
     }
-    console.log(newItem)
+    let newState = {...this.state};
     fetch('/api/todos', {
       method: 'POST', // or 'PUT'
       headers: {
@@ -65,22 +65,41 @@ class Todos extends React.Component {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      newState.items.push(data.todo);
+      newState.newItemText = '';
+      this.setState(newState);
     })
     .catch((error) => {
       console.error('Error:', error);
     });
 
-    // let newState = {...this.state};
-    // newState.items.push(newItem);
-    // newState.newItemText = '';
-    // this.setState(newState);
   }
   
   _handleCheckbox(e, index) {
     console.log('fire check')
     let newState = {...this.state};
-    newState.items[index].done = e.target.checked;
-    this.setState(newState);
+    // newState.items[index].done = e.target.checked;
+    // this.setState(newState);
+
+    let updatedItem = this.state.items[index];
+    updatedItem.done = e.target.checked;
+
+    fetch('/api/todos/' + updatedItem._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedItem),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      newState.items[index].done = data.todo;
+      this.setState(newState);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
   
   render() {
