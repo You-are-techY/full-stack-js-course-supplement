@@ -54,11 +54,26 @@ class Todos extends React.Component {
       text: this.state.newItemText
       , done: false 
     }
-    
-    let newState = {...this.state};
-    newState.items.push(newItem);
-    newState.newItemText = '';
-    this.setState(newState);
+    console.log(newItem)
+    fetch('/api/todos', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newItem),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+    // let newState = {...this.state};
+    // newState.items.push(newItem);
+    // newState.newItemText = '';
+    // this.setState(newState);
   }
   
   _handleCheckbox(e, index) {

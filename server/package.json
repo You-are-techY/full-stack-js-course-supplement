@@ -4,6 +4,7 @@
   "description": "This repository contains the source code for the You Are TechY Full Stack JS Course.  It is organized into several branches by module and lesson. Syntax is `moduel-x/lesson-y/chapter-z`",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "finalhandler": "^1.1.2",
     "http": "^0.0.1-security",

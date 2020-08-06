@@ -28,9 +28,9 @@ exports.getById = (req, res) => {
 
 
 exports.create = (req, res) => {
-  logger.info('creating new todo');
+  console.log('creating new todo');
   let todo = new Todo({});
-
+  console.log(req.body);
   // run through and create all fields on the model
   for(var k in req.body) {
     if(req.body.hasOwnProperty(k)) {
@@ -40,21 +40,21 @@ exports.create = (req, res) => {
 
   todo.save((err, todo) => {
     if (err) {
-      logger.error("ERROR:");
-      logger.info(err);
+      console.log("ERROR:");
+      console.log(err);
       res.send({ success: false, message: err });
     } else if(!todo) {
-      logger.error("ERROR: Could not create Todo")
+      console.log("ERROR: Could not create Todo")
       res.send({ success: false, message: "Could not create Todo." });
     } else {
-      logger.info("created new todo");
+      console.log("created new todo");
       res.send({ success: true, todo });
     }
   });
 }
 
 exports.update = (req, res) => {
-  logger.info('updating todo');
+  console.log('updating todo');
   Todo.findById(req.params.id).exec((err, todo) => {
     if(err) {
       res.send({ success: false, message: err });
@@ -83,7 +83,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-  logger.warn("deleting todo");
+  console.log("deleting todo");
   Todo.findById(req.params.id).remove((err) => {
     if(err) {
       res.send({ success: false, message: err });
