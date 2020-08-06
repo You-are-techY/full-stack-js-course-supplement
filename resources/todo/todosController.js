@@ -1,4 +1,4 @@
-Todo = require('mongoose').model('Todo');
+let Todo = require('mongoose').model('Todo');
 
 exports.list = (req, res) => {
   Todo.find({}).exec((err, todos) => {
