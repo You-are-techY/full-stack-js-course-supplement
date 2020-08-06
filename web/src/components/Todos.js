@@ -5,13 +5,36 @@ class Todos extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: []
+      error: null 
+      , isLoaded: false 
+      , items: []
       , newItemText: ""
     }
     this._handleTextChange = this._handleTextChange.bind(this);
     this._handleAddItem = this._handleAddItem.bind(this);
     this._handleCheckbox = this._handleCheckbox.bind(this);
     this._clearItem = this._clearItem.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("/api/todos")
+      .then(res => res.json())
+      .then(result => {
+        this.setState({
+          isLoaded: true 
+          , items: result.todos 
+        })
+      }, error => {
+        /**
+         * Note: it's important to handle errors here
+         * instead of a catch() block so that we don't swallow
+         * exceptions from actual bugs in components.
+         */ 
+        this.setState({
+          isLoaded: true 
+          , error
+        })
+      })
   }
   
   _clearItem(index) {
