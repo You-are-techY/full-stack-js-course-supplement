@@ -10,7 +10,7 @@ module.exports = function(router, app) {
 
   // render layout
   router.get('*', function(req, res) {
-    res.render('public/index.html', {});
+    res.render('public', {});
   });
 
 }

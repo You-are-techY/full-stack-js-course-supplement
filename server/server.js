@@ -1,5 +1,5 @@
-const express = require('express');
-const app = express();
+const express       = require('express');
+const app           = express();
 let serveStatic     = require('serve-static');
 let bodyParser      = require('body-parser');
 
@@ -9,7 +9,14 @@ const hostname = 'localhost';
 // initialize db
 require('./db')();
 
+
+app.set('views', __dirname);
+// Mapping the EJS template engine to ".html" files
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
 app.use(serveStatic(__dirname + '/public'));
+
 
 // tell server how to parse req.body
 app.use(bodyParser.json());
