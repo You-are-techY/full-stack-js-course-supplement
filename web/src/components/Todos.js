@@ -26,24 +26,6 @@ class Todos extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(todoActions.fetchList());
-    fetch("/api/todos")
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          isLoaded: true 
-          , items: result.todos 
-        })
-      }, error => {
-        /**
-         * Note: it's important to handle errors here
-         * instead of a catch() block so that we don't swallow
-         * exceptions from actual bugs in components.
-         */ 
-        this.setState({
-          isLoaded: true 
-          , error
-        })
-      })
   }
   
   _clearItem(index) {
@@ -112,7 +94,9 @@ class Todos extends React.Component {
   }
   
   render() {
+
     console.log(this.state);
+    console.log(this.props.todoStore);
     return (
       <div>
         <h2>Todos:</h2>
@@ -139,8 +123,9 @@ Todos.propTypes = {
 }
 
 const mapStateToProps = (store) => {
+  console.log(store);
   return {
-    todoStore: store.todo
+    todoStore: store.todoReducer
   }
 }
 
