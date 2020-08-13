@@ -1,5 +1,13 @@
+// import core libraries 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+// import components 
 import Item from './Item';
+
+// import actions 
+import { todoActions } from '../actions';
 
 class Todos extends React.Component {
   constructor(props) {
