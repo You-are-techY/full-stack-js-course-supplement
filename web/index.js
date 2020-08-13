@@ -1,4 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
+
+// import redux things
+import { Provider } from 'react-redux';
+import configureStore from './configureStore';
+
 import App from "./src/App.js";
-ReactDOM.render(<App />, document.getElementById("todos-app"));
+
+const store = configureStore();
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , document.getElementById("todos-app")
+);
