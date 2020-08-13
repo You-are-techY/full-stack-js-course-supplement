@@ -94,19 +94,16 @@ class Todos extends React.Component {
   }
   
   render() {
-
-    console.log(this.state);
-    console.log(this.props.todoStore);
     return (
       <div>
         <h2>Todos:</h2>
         <ol>
-        {this.state.items.map((item,i) => (
+        {this.props.todoStore.list.all.items.map((id,i) => (
           <Item
             changeStatus={this._handleCheckbox}
             key={i}
             index={i}
-            item={item}
+            item={this.props.todoStore.map[id]}
             clearItem={this._clearItem}
           />
         ))}
@@ -123,7 +120,6 @@ Todos.propTypes = {
 }
 
 const mapStateToProps = (store) => {
-  console.log(store);
   return {
     todoStore: store.todoReducer
   }
