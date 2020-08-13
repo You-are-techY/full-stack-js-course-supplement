@@ -239,7 +239,6 @@ export function fetchList() {
         , 'token': store.getState().user.apiToken
       }
     })
-      .then(response => response.json())
       .then(json => {
         if(json.success) {
           var itemMap = {};
