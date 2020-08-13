@@ -25,6 +25,7 @@ class Todos extends React.Component {
   }
 
   componentDidMount() {
+    this.props.dispatch(todoActions.fetchList());
     fetch("/api/todos")
       .then(res => res.json())
       .then(result => {

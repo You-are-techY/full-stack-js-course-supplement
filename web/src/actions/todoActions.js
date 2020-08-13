@@ -231,15 +231,7 @@ export function fetchList() {
   // console.log("FETCH TODO LIST");
   return dispatch => {
     dispatch(requestTodoList())
-    return apiUtils.callAPI(`/api/todos`, {
-      method: 'GET'
-      , headers: {
-        'Accept': 'application/json'
-        , 'Content-Type': 'application/json'
-        , 'token': store.getState().user.apiToken
-      }
-    })
-      .then(response => response.json())
+    return apiUtils.callAPI(`/api/todos`)
       .then(json => {
         if(json.success) {
           var itemMap = {};
