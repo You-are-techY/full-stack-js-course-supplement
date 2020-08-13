@@ -143,4 +143,4 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default Todos;
+export default connect(Todos);
