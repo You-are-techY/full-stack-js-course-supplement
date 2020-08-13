@@ -133,4 +133,14 @@ class Todos extends React.Component {
   }
 }
 
+Todos.propTypes = {
+  dispatch: PropTypes.func.isRequired 
+}
+
+const mapStateToProps = (store) => {
+  return {
+    todoStore: store.todo
+  }
+}
+
 export default Todos;
