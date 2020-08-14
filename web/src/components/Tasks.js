@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import Item from './Item';
 
 // import actions 
-import { todoActions } from '../actions';
+import { taskActions } from '../actions';
 
-class Todos extends React.Component {
+class Tasks extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,15 +24,15 @@ class Todos extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(todoActions.fetchList());
+    dispatch(taskActions.fetchList());
   }
 
   
   _clearItem(id) {
     const { dispatch } = this.props;
-    dispatch(todoActions.sendDelete(id)).then(res => {
+    dispatch(taskActions.sendDelete(id)).then(res => {
       if(res.success) {
-        dispatch(todoActions.fetchList());
+        dispatch(taskActions.fetchList());
       } else {
         alert("Error: check logs");
       }
@@ -51,12 +51,12 @@ class Todos extends React.Component {
       text: this.state.newItemText
       , done: false 
     }
-    dispatch(todoActions.sendCreateTodo(newItem)).then(res =>{
+    dispatch(taskActions.sendCreateTask(newItem)).then(res =>{
       console.log(res); 
       if(res.success) {
         // clear text 
         this.setState({newItemText: ''});
-        dispatch(todoActions.fetchList());
+        dispatch(taskActions.fetchList());
       } else {
         alert("There was an error:", res.message)
       }
@@ -65,10 +65,10 @@ class Todos extends React.Component {
   
   _handleCheckbox(id) {
     // console.log('fire check', e.target.checked)
-    const { dispatch, todoStore } = this.props;
-    let updatedItem = {...todoStore.map[id]} 
-    updatedItem.done = !todoStore.map[id].done;
-    dispatch(todoActions.sendUpdateTodo(updatedItem)).then(res => {
+    const { dispatch, taskStore } = this.props;
+    let updatedItem = {...taskStore.map[id]} 
+    updatedItem.done = !taskStore.map[id].done;
+    dispatch(taskActions.sendUpdateTask(updatedItem)).then(res => {
       console.log(res)
       if(res.success) {
         console.log('success');
@@ -79,11 +79,11 @@ class Todos extends React.Component {
   }
   
   render() {
-    const { todoStore } = this.props;
-    const allItems = todoStore.list.all.items;
+    const { taskStore } = this.props;
+    const allItems = taskStore.list.all.items;
     return (
       <div>
-        <h2>Todos:</h2>
+        <h2>Tasks:</h2>
         <ol>
         { allItems ? 
           allItems.map((id,i) => (
@@ -91,7 +91,7 @@ class Todos extends React.Component {
             changeStatus={() => this._handleCheckbox(id)}
             key={i}
             index={i}
-            item={todoStore.map[id]}
+            item={taskStore.map[id]}
             clearItem={() => this._clearItem(id)}
           />
           ))
@@ -106,14 +106,14 @@ class Todos extends React.Component {
   }
 }
 
-Todos.propTypes = {
+Tasks.propTypes = {
   dispatch: PropTypes.func.isRequired 
 }
 
 const mapStateToProps = (store) => {
   return {
-    todoStore: store.todoReducer
+    taskStore: store.taskReducer
   }
 }
 
-export default connect(mapStateToProps)(Todos);
+export default connect(mapStateToProps)(Tasks);

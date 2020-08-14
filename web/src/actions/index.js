@@ -3,10 +3,10 @@ combine all actions into one export file
 ****/
 
 
-import * as todoActions from './todoActions';
+import * as taskActions from './taskActions';
 
-export { todoActions };
+export { taskActions };
 
 export default {
-  todoActions
+  taskActions
 }

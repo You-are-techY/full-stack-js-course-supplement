@@ -1,16 +1,16 @@
 /*****
-SINGLE TODO CRUD ACTIONS GO HERE
+SINGLE TASK CRUD ACTIONS GO HERE
 getById, create, update, delete, etc
 *****/
 
 // import api utility
 import apiUtils from '../utils/api'
 
-// SINGLE TODO ACTIONS
+// SINGLE TASK ACTIONS
 
 const shouldFetchSingle = (state, id) => {
   console.log("do we need to fetch this dodo?");
-  const { map, selected } = state.todo;
+  const { map, selected } = state.task;
   if(selected.id !== id) {
     console.log("this is different from selected in the reducer. yes, let's fetch.");
     return true;
@@ -26,131 +26,131 @@ const shouldFetchSingle = (state, id) => {
   }
 }
 
-export const INVALIDATE_SELECTED_TODO = "INVALIDATE_SELECTED_TODO"
+export const INVALIDATE_SELECTED_TASK = "INVALIDATE_SELECTED_TASK"
 export function invaldiateSelected() {
   return {
-    type: INVALIDATE_SELECTED_TODO
+    type: INVALIDATE_SELECTED_TASK
   }
 }
 
 export const fetchSingleIfNeeded = (id) => (dispatch, getState) => {
   if (shouldFetchSingle(getState(), id)) {
     console.log("SHOULD FETCH!");
-    return dispatch(fetchSingleTodoById(id))
+    return dispatch(fetchSingleTaskById(id))
   } else {
     console.log("DON'T NEED TO FETCH");
   }
 }
 
-export const REQUEST_SINGLE_TODO = "REQUEST_SINGLE_TODO";
-function requestSingleTodo(id) {
+export const REQUEST_SINGLE_TASK = "REQUEST_SINGLE_TASK";
+function requestSingleTask(id) {
   return {
-    type: REQUEST_SINGLE_TODO
+    type: REQUEST_SINGLE_TASK
     , id
   }
 }
 
-export const RECEIVE_SINGLE_TODO = "RECEIVE_SINGLE_TODO";
-function receiveSingleTodo(json) {
-  console.log("received", json.todo._id);
+export const RECEIVE_SINGLE_TASK = "RECEIVE_SINGLE_TASK";
+function receiveSingleTask(json) {
+  console.log("received", json.task._id);
   return {
-    type: RECEIVE_SINGLE_TODO
-    , id: json.todo._id
-    , item: json.todo
+    type: RECEIVE_SINGLE_TASK
+    , id: json.task._id
+    , item: json.task
     , success: json.success
     , error: json.message
     , receivedAt: Date.now()
   }
 }
 
-export function fetchSingleTodoById(todoId) {
+export function fetchSingleTaskById(taskId) {
   console.log("fetching");
   return dispatch => {
-    dispatch(requestSingleTodo(todoId))
-    return apiUtils.callAPI(`/api/todos/${todoId}`)
-      .then(json => dispatch(receiveSingleTodo(json)))
+    dispatch(requestSingleTask(taskId))
+    return apiUtils.callAPI(`/api/tasks/${taskId}`)
+      .then(json => dispatch(receiveSingleTask(json)))
   }
 }
 
-export const ADD_SINGLE_TODO_TO_MAP = "ADD_SINGLE_TODO_TO_MAP";
-export function addSingleTodoToMap(item) {
+export const ADD_SINGLE_TASK_TO_MAP = "ADD_SINGLE_TASK_TO_MAP";
+export function addSingleTaskToMap(item) {
   return {
-    type: ADD_SINGLE_TODO_TO_MAP
+    type: ADD_SINGLE_TASK_TO_MAP
     , item
   }
 }
 
-export const REQUEST_CREATE_TODO = "REQUEST_CREATE_TODO";
-function requestCreateTodo(todo) {
+export const REQUEST_CREATE_TASK = "REQUEST_CREATE_TASK";
+function requestCreateTask(task) {
   return {
-    type: REQUEST_CREATE_TODO
-    , todo
+    type: REQUEST_CREATE_TASK
+    , task
   }
 }
 
-export const RECEIVE_CREATE_TODO = "RECEIVE_CREATE_TODO";
-function receiveCreateTodo(json) {
-  console.log("RECEIVE_CREATE_TODO");
+export const RECEIVE_CREATE_TASK = "RECEIVE_CREATE_TASK";
+function receiveCreateTask(json) {
+  console.log("RECEIVE_CREATE_TASK");
   console.log(json);
   return {
-    type: RECEIVE_CREATE_TODO
-    , id: json.todo ? json.todo._id : null
-    , item: json.todo
+    type: RECEIVE_CREATE_TASK
+    , id: json.task ? json.task._id : null
+    , item: json.task
     , success: json.success
     , error: json.message
     , receivedAt: Date.now()
   }
 }
 
-export function sendCreateTodo(data) {
-  console.log("sendCreateTodo")
+export function sendCreateTask(data) {
+  console.log("sendCreateTask")
   return dispatch => {
-    dispatch(requestCreateTodo(data))
-    return apiUtils.callAPI(`/api/todos`, 'POST', data)
-      .then(json => dispatch(receiveCreateTodo(json)))
+    dispatch(requestCreateTask(data))
+    return apiUtils.callAPI(`/api/tasks`, 'POST', data)
+      .then(json => dispatch(receiveCreateTask(json)))
   }
 }
 
-export const REQUEST_UPDATE_TODO = "REQUEST_UPDATE_TODO";
-function requestUpdateTodo(todo) {
+export const REQUEST_UPDATE_TASK = "REQUEST_UPDATE_TASK";
+function requestUpdateTask(task) {
   return {
-    type: REQUEST_UPDATE_TODO
-    , todo
+    type: REQUEST_UPDATE_TASK
+    , task
   }
 }
 
-export const RECEIVE_UPDATE_TODO = "RECEIVE_UPDATE_TODO";
-function receiveUpdateTodo(json) {
+export const RECEIVE_UPDATE_TASK = "RECEIVE_UPDATE_TASK";
+function receiveUpdateTask(json) {
   return {
-    type: RECEIVE_UPDATE_TODO
-    , id: json.todo ? json.todo._id : null
-    , item: json.todo
+    type: RECEIVE_UPDATE_TASK
+    , id: json.task ? json.task._id : null
+    , item: json.task
     , success: json.success
     , error: json.message
     , receivedAt: Date.now()
   }
 }
 
-export function sendUpdateTodo(data) {
+export function sendUpdateTask(data) {
   return dispatch => {
-    dispatch(requestUpdateTodo(data))
-    return apiUtils.callAPI(`/api/todos/${data._id}`, 'PUT', data)
-    .then(json => dispatch(receiveUpdateTodo(json)))
+    dispatch(requestUpdateTask(data))
+    return apiUtils.callAPI(`/api/tasks/${data._id}`, 'PUT', data)
+    .then(json => dispatch(receiveUpdateTask(json)))
   }
 }
 
-export const REQUEST_DELETE_TODO = "REQUEST_DELETE_TODO";
-function requestDeleteTodo(todoId) {
+export const REQUEST_DELETE_TASK = "REQUEST_DELETE_TASK";
+function requestDeleteTask(taskId) {
   return {
-    type: REQUEST_DELETE_TODO
-    , todoId
+    type: REQUEST_DELETE_TASK
+    , taskId
   }
 }
 
-export const RECEIVE_DELETE_TODO = "RECEIVE_DELETE_TODO";
-function receiveDeleteTodo(json) {
+export const RECEIVE_DELETE_TASK = "RECEIVE_DELETE_TASK";
+function receiveDeleteTask(json) {
   return {
-    type: RECEIVE_DELETE_TODO
+    type: RECEIVE_DELETE_TASK
     , success: json.success
     , error: json.message
     , receivedAt: Date.now()
@@ -159,18 +159,18 @@ function receiveDeleteTodo(json) {
 
 export function sendDelete(id) {
   return dispatch => {
-    dispatch(requestDeleteTodo(id))
-    return apiUtils.callAPI(`/api/todos/${id}`, 'DELETE')
-    .then(json => dispatch(receiveDeleteTodo(json)))
+    dispatch(requestDeleteTask(id))
+    return apiUtils.callAPI(`/api/tasks/${id}`, 'DELETE')
+    .then(json => dispatch(receiveDeleteTask(json)))
   }
 }
 
-//TODO LIST ACTIONS
+//TASK LIST ACTIONS
 
 const shouldFetchList = (state, type) => {
   console.log("shouldFetchList");
   //types: "all", "published", etc
-  const list = state.todo.lists[type];
+  const list = state.task.lists[type];
   if(!list || !list.items) {
     console.log("ERROR: CANNOT FIND LIST TYPE: " + type);
   } else if(list.items.length < 1) {
@@ -200,19 +200,19 @@ export const fetchListIfNeeded = (type, id) => (dispatch, getState) => {
   }
 }
 
-export const REQUEST_TODO_LIST = "REQUEST_TODO_LIST"
-function requestTodoList() {
-  console.log('requesting todos list')
+export const REQUEST_TASK_LIST = "REQUEST_TASK_LIST"
+function requestTaskList() {
+  console.log('requesting tasks list')
   return {
-    type: REQUEST_TODO_LIST
+    type: REQUEST_TASK_LIST
   }
 }
 
-export const RECEIVE_TODO_LIST = "RECEIVE_TODO_LIST"
-function receiveTodoList(json) {
+export const RECEIVE_TASK_LIST = "RECEIVE_TASK_LIST"
+function receiveTaskList(json) {
   return {
-    type: RECEIVE_TODO_LIST
-    , list: json.todos
+    type: RECEIVE_TASK_LIST
+    , list: json.tasks
     , success: json.success
     , error: json.message
     , receivedAt: Date.now()
@@ -220,15 +220,15 @@ function receiveTodoList(json) {
 }
 
 export function fetchList() {
-  // console.log("FETCH TODO LIST");
+  // console.log("FETCH TASK LIST");
   return dispatch => {
-    dispatch(requestTodoList())
-    return apiUtils.callAPI(`/api/todos`)
+    dispatch(requestTaskList())
+    return apiUtils.callAPI(`/api/tasks`)
       .then(json => {
         if(json.success) {
           var itemMap = {};
-          for(var i = 0; i < json.todos.length; i++) {
-            itemMap[json.todos[i]._id] = json.todos[i];
+          for(var i = 0; i < json.tasks.length; i++) {
+            itemMap[json.tasks[i]._id] = json.tasks[i];
           }
           json.itemMap = itemMap;
           return json;
@@ -238,7 +238,7 @@ export function fetchList() {
           return json;
         }
       })
-      .then(json => dispatch(receiveTodoList(json)))
+      .then(json => dispatch(receiveTaskList(json)))
   }
 }
 
@@ -246,46 +246,46 @@ export function fetchList() {
 
 
 //LIST UTIL METHODS
-export const SET_TODO_FILTER = "SET_TODO_FILTER"
+export const SET_TASK_FILTER = "SET_TASK_FILTER"
 export function setFilter(listType, filter) {
   return {
-    type: SET_TODO_FILTER
+    type: SET_TASK_FILTER
     , filter
     , listType
   }
 }
 
-export const SET_TODO_SORT = "SET_TODO_SORT"
+export const SET_TASK_SORT = "SET_TASK_SORT"
 export function setSortBy(listType, sortBy) {
   return {
-    type: SET_TODO_SORT
+    type: SET_TASK_SORT
     , sortBy
     , listType
   }
 }
 
-export const SET_TODO_QUERY = "SET_TODO_QUERY"
+export const SET_TASK_QUERY = "SET_TASK_QUERY"
 export function setQuery(listType, query) {
   return {
-    type: SET_TODO_QUERY
+    type: SET_TASK_QUERY
     , query
     , listType
   }
 }
 
-export const SET_TODO_PAGINATION = "SET_TODO_PAGINATION"
+export const SET_TASK_PAGINATION = "SET_TASK_PAGINATION"
 export function setPagination(listType, pagination) {
   return {
-    type: SET_TODO_PAGINATION
+    type: SET_TASK_PAGINATION
     , pagination
     , listType
   }
 }
 
-export const INVALIDATE_TODO_LIST = "INVALIDATE_TODO_LIST"
+export const INVALIDATE_TASK_LIST = "INVALIDATE_TASK_LIST"
 export function invaldiateList(listType) {
   return {
-    type: INVALIDATE_TODO_LIST
+    type: INVALIDATE_TASK_LIST
     , listType
   }
 } 

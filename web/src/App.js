@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 
-import Todos from './components/Todos';
+import Tasks from './components/Tasks';
 
 class App extends React.Component {
 
   render() {
     return (
       <div className="todos-app">
-        <Todos/>
+        <Tasks/>
       </div>
     );
   }
