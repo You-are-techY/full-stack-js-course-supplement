@@ -1,12 +1,11 @@
 
-import { taskActions } from '../actions';
+import { todoListActions } from '../actions';
 
-function task(state = {
-  // define fields for a "new" task
+function todoList(state = {
+  // define fields for a "new" todoList
   // a component that creates a new object should store a copy of this in it's state
   defaultItem: {
-    text: ""
-    , done: false 
+    name: ""
   }
 
   , map: {} //map of all items
@@ -34,14 +33,14 @@ function task(state = {
       }
     }
     // add other list here, like "published" or "featured"
-    // accessed like "task.list.all" or "task.list.published"
+    // accessed like "todoList.list.all" or "todoList.list.published"
 
   }
 }, action) {
   let nextState = Object.assign({}, state, {});
   switch(action.type) {
 //SINGLE ITEM ACTIONS
-    case taskActions.REQUEST_SINGLE_TASK:
+    case todoListActions.REQUEST_SINGLE_TODO_LIST:
       return Object.assign({}, state, {
         selected: {
           id: action.id
@@ -49,7 +48,7 @@ function task(state = {
           , error: null
         }
       })
-    case taskActions.RECEIVE_SINGLE_TASK:
+    case todoListActions.RECEIVE_SINGLE_TODO_LIST:
       if(action.success) {
         console.log("Mapping now");
         //add object to map
@@ -77,16 +76,16 @@ function task(state = {
         })
       }
 
-    case taskActions.ADD_SINGLE_TASK_TO_MAP:
-      console.log("ADD_SINGLE_TASK_TO_MAP");
+    case todoListActions.ADD_SINGLE_TODO_LIST_TO_MAP:
+      console.log("ADD_SINGLE_TODO_LIST_TO_MAP");
       var newMap = Object.assign({}, state.map, {}); //copy map
       newMap[action.item._id] = action.item; //add single
       return Object.assign({}, state, {
         map: newMap
       })
 
-    case taskActions.REQUEST_CREATE_TASK:
-      console.log("REQUEST_CREATE_TASK");
+    case todoListActions.REQUEST_CREATE_TODO_LIST:
+      console.log("REQUEST_CREATE_TODO_LIST");
       return Object.assign({}, state, {
         selected: {
           id: null
@@ -94,8 +93,8 @@ function task(state = {
           , error: null
         }
       })
-    case taskActions.RECEIVE_CREATE_TASK:
-      console.log("RECEIVE_CREATE_TASK");
+    case todoListActions.RECEIVE_CREATE_TODO_LIST:
+      console.log("RECEIVE_CREATE_TODO_LIST");
       if(action.success) {
         // add object to map
         let newMap = Object.assign({}, state.map, {});
@@ -122,7 +121,7 @@ function task(state = {
         })
       }
 
-    case taskActions.REQUEST_UPDATE_TASK:
+    case todoListActions.REQUEST_UPDATE_TODO_LIST:
       return Object.assign({}, state, {
         selected: {
           id: action.id
@@ -131,7 +130,7 @@ function task(state = {
         }
       })
 
-    case taskActions.RECEIVE_UPDATE_TASK:
+    case todoListActions.RECEIVE_UPDATE_TODO_LIST:
       if(action.success) {
         //add object to map
         let newMap = Object.assign({}, state.map, {});
@@ -158,7 +157,7 @@ function task(state = {
         })
       }
 
-    case taskActions.REQUEST_DELETE_TASK:
+    case todoListActions.REQUEST_DELETE_TODO_LIST:
       return Object.assign({}, state, {
         selected: {
           id: action.id
@@ -166,7 +165,7 @@ function task(state = {
           , error: null
         }
       })
-    case taskActions.RECEIVE_DELETE_TASK:
+    case todoListActions.RECEIVE_DELETE_TODO_LIST:
       if(action.success) {
         //remove object from map
         let newMap = Object.assign({}, state.map, {});
@@ -194,13 +193,13 @@ function task(state = {
       }
 
 //LIST ACTIONS
-    case taskActions.REQUEST_TASK_LIST:
+    case todoListActions.REQUEST_TODO_LIST_LIST:
       nextState = Object.assign({}, state, {});
       nextState.list.all.isFetching = true;
       nextState.list.all.error = null;
       nextState.list.all.items = [];
       return nextState;
-    case taskActions.RECEIVE_TASK_LIST:
+    case todoListActions.RECEIVE_TODO_LIST_LIST:
       nextState = Object.assign({}, state, {});
       if(action.success) {
         //add api array objects to map
@@ -227,28 +226,28 @@ function task(state = {
         nextState.list.all.lastUpdated = action.receivedAt
         return nextState;
       }
-    case taskActions.SET_TASK_FILTER:
+    case todoListActions.SET_TODO_LIST_FILTER:
       let newList = Object.assign({}, state.list[action.listType], {});
       // newList.
       return Object.assign({}, state, {
-        //TASK
+        //TODO_LIST
       })
 
-    case taskActions.SET_TASK_SORT:
+    case todoListActions.SET_TODO_LIST_SORT:
       return Object.assign({}, state, {
         sortBy: action.sortBy
         , type: action.listType
       })
-    case taskActions.SET_TASK_QUERY:
+    case todoListActions.SET_TODO_LIST_QUERY:
       return Object.assign({}, state, {
         query: action.query
         , listType: action.listType
       })
-    case taskActions.SET_TASK_PAGINATION:
+    case todoListActions.SET_TODO_LIST_PAGINATION:
       return Object.assign({}, state, {
         pagination: action.pagination
       })
-    case taskActions.INVALIDATE_TASK_LIST:
+    case todoListActions.INVALIDATE_TODO_LIST_LIST:
       let nextState = Object.assign({}, state, {});
       nextState.list[action.listType].didInvalidate = true;
       return nextState;
@@ -258,4 +257,4 @@ function task(state = {
   }
 }
 
-export default task;
+export default todoList;
