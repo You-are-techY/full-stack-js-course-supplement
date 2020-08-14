@@ -48,7 +48,7 @@ class TodoLists extends React.Component {
     const { todoListStore } = this.props;
     const allItems = todoListStore.list.all.items;
     return (
-      <div>
+      <div className="sidebar">
         <h2>Todo Lists:</h2>
         <ul>
         { allItems ? 

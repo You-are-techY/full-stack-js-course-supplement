@@ -1,13 +1,10 @@
 body {
-  background: #20262E;
-  padding: 20px;
+  background: #fff;
   font-family: Helvetica;
 }
 
 #todos-app {
   background: #fff;
-  border-radius: 4px;
-  padding: 20px;
   transition: all 0.2s;
 }
 
@@ -27,4 +24,23 @@ h2 {
 
 input {
   margin-right: 5px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 270px;
+  background-color: #eaeaea;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-left: 0;
 }
