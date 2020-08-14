@@ -162,15 +162,6 @@ export function sendDelete(id) {
     dispatch(requestDeleteTodo(id))
     return apiUtils.callAPI(`/api/todos/${id}`, 'DELETE')
     .then(json => dispatch(receiveDeleteTodo(json)))
-    /*** ACTION-BASED REDIRECT ***/
-    // - use this for Delete by default
-    .then((json) => {
-      if(json.success) {
-        browserHistory.push(`/todos`)
-      } else {
-        alert("ERROR");
-      }
-    })
   }
 }
 

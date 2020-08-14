@@ -27,10 +27,14 @@ class Todos extends React.Component {
   }
 
   
-  _clearItem(index) {
-    let newState = {...this.state};
-    newState.items.splice(index, 1);
-    this.setState(newState);
+  _clearItem(id) {
+    this.props.dispatch(todoActions.sendDelete(id)).then(res => {
+      if(res.success) {
+        this.props.dispatch(todoActions.fetchList());
+      } else {
+        alert("Error: check logs");
+      }
+    })
   }
   
   _handleTextChange(event) {
@@ -82,7 +86,7 @@ class Todos extends React.Component {
             key={i}
             index={i}
             item={this.props.todoStore.map[id]}
-            clearItem={this._clearItem}
+            clearItem={() => this._clearItem(id)}
           />
         ))}
         </ol>
