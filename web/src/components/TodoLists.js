@@ -9,11 +9,39 @@ import { todoListActions } from '../actions';
 class TodoLists extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      error: null 
+      , newListName: ""
+    }
+    this._handleTextChange = this._handleTextChange.bind(this);
+    this._handleAddList = this._handleAddList.bind(this);
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(todoListActions.fetchList());
+  }
+
+  _handleTextChange(event) {
+    // console.log(event.target.value);
+    this.setState({newListName: event.target.value})
+  }
+  
+  _handleAddList(e) {
+    const { dispatch } = this.props;
+    e.preventDefault();
+    let newList = {
+      name: this.state.newListName
+    }
+    dispatch(todoListActions.sendCreateTodoList(newList)).then(res =>{
+      console.log(res); 
+      if(res.success) {
+        this.setState({newListName: ''});
+        dispatch(todoListActions.fetchList());
+      } else {
+        alert("There was an error:", res.message)
+      }
+    })
   }
 
   render() {
@@ -31,6 +59,8 @@ class TodoLists extends React.Component {
           null 
         }
         </ul>
+        <input type="text" value={this.state.newListName} onChange={this._handleTextChange} />
+        <button type="button" onClick={this._handleAddList}>Add list</button>
       </div>
     )
   }
