@@ -123,6 +123,7 @@ export const RECEIVE_UPDATE_TODO = "RECEIVE_UPDATE_TODO";
 function receiveUpdateTodo(json) {
   return {
     type: RECEIVE_UPDATE_TODO
+    , id: json.todo ? json.todo._id : null
     , item: json.todo
     , success: json.success
     , error: json.message

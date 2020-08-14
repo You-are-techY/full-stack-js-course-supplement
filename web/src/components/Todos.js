@@ -56,31 +56,19 @@ class Todos extends React.Component {
     })
   }
   
-  _handleCheckbox(e, index) {
-    console.log('fire check', e.target.checked)
-    let newState = {...this.state};
-    // newState.items[index].done = e.target.checked;
-    // this.setState(newState);
+  _handleCheckbox(id) {
+    // console.log('fire check', e.target.checked)
 
-    let updatedItem = this.state.items[index];
-    updatedItem.done = e.target.checked;
-
-    fetch('/api/todos/' + updatedItem._id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedItem),
+    let updatedItem = {...this.props.todoStore.map[id]} 
+    updatedItem.done = !this.props.todoStore.map[id].done;
+    this.props.dispatch(todoActions.sendUpdateTodo(updatedItem)).then(res => {
+      console.log(res)
+      if(res.success) {
+        console.log('success');
+      } else {
+        alert("error: check logs");
+      }
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      newState.items[index].done = data.todo;
-      this.setState(newState);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
   }
   
   render() {
@@ -90,7 +78,7 @@ class Todos extends React.Component {
         <ol>
         {this.props.todoStore.list.all.items.map((id,i) => (
           <Item
-            changeStatus={this._handleCheckbox}
+            changeStatus={() => this._handleCheckbox(id)}
             key={i}
             index={i}
             item={this.props.todoStore.map[id]}
