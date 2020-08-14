@@ -53,7 +53,7 @@ class TodoLists extends React.Component {
         <ul>
         { allItems ? 
           allItems.map((id,i) => (
-            <li>{todoListStore.map[id].name}</li>
+            <li key={id}>{todoListStore.map[id].name}</li>
           ))
           :
           null 
