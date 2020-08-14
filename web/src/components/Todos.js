@@ -14,8 +14,6 @@ class Todos extends React.Component {
     super(props)
     this.state = {
       error: null 
-      , isLoaded: false 
-      , items: []
       , newItemText: ""
     }
     this._handleTextChange = this._handleTextChange.bind(this);
@@ -27,6 +25,7 @@ class Todos extends React.Component {
   componentDidMount() {
     this.props.dispatch(todoActions.fetchList());
   }
+
   
   _clearItem(index) {
     let newState = {...this.state};
@@ -45,25 +44,16 @@ class Todos extends React.Component {
       text: this.state.newItemText
       , done: false 
     }
-    let newState = {...this.state};
-    fetch('/api/todos', {
-      method: 'POST', // or 'PUT'
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newItem),
+    this.props.dispatch(todoActions.sendCreateTodo(newItem)).then(res =>{
+      console.log(res); 
+      if(res.success) {
+        // clear text 
+        this.setState({newItemText: ''});
+        this.props.dispatch(todoActions.fetchList());
+      } else {
+        alert("There was an error:", res.message)
+      }
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      newState.items.push(data.todo);
-      newState.newItemText = '';
-      this.setState(newState);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-
   }
   
   _handleCheckbox(e, index) {

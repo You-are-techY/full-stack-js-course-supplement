@@ -97,7 +97,7 @@ function todo(state = {
     case todoActions.RECEIVE_CREATE_TODO:
       console.log("RECEIVE_CREATE_TODO");
       if(action.success) {
-        //add object to map
+        // add object to map
         let newMap = Object.assign({}, state.map, {});
         newMap[action.id] = action.item;
         return Object.assign({}, state, {
