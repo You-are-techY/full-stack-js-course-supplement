@@ -7,4 +7,5 @@ module.exports = function(router) {
   });
 }
 
-routeFilenames.push('todo/todosApi');
+routeFilenames.push('todoList/todoListsApi');
+routeFilenames.push('todoItem/todoItemsApi');

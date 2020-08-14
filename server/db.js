@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const hostname = 'localhost'; 
 const dbName = 'techy';
 
-let Todo = require('./resources/todo/TodoModel.js');
+let TodoList = require('./resources/todoList/TodoListModel.js');
+let TodoItem = require('./resources/todoItem/TodoItemModel.js');
 
 module.exports = () => {
   mongoose.connect(`mongodb://${hostname}/${dbName}`, {useNewUrlParser: true});
@@ -16,5 +17,5 @@ module.exports = () => {
   });
 
   // when the server connect, create defaults 
-  Todo.createDefaults();
+  TodoList.createDefaults();
 }
