@@ -23,14 +23,16 @@ class Todos extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(todoActions.fetchList());
+    const { dispatch } = this.props;
+    dispatch(todoActions.fetchList());
   }
 
   
   _clearItem(id) {
-    this.props.dispatch(todoActions.sendDelete(id)).then(res => {
+    const { dispatch } = this.props;
+    dispatch(todoActions.sendDelete(id)).then(res => {
       if(res.success) {
-        this.props.dispatch(todoActions.fetchList());
+        dispatch(todoActions.fetchList());
       } else {
         alert("Error: check logs");
       }
@@ -43,17 +45,18 @@ class Todos extends React.Component {
   }
   
   _handleAddItem(e) {
+    const { dispatch } = this.props;
     e.preventDefault();
     let newItem = {
       text: this.state.newItemText
       , done: false 
     }
-    this.props.dispatch(todoActions.sendCreateTodo(newItem)).then(res =>{
+    dispatch(todoActions.sendCreateTodo(newItem)).then(res =>{
       console.log(res); 
       if(res.success) {
         // clear text 
         this.setState({newItemText: ''});
-        this.props.dispatch(todoActions.fetchList());
+        dispatch(todoActions.fetchList());
       } else {
         alert("There was an error:", res.message)
       }
@@ -62,10 +65,10 @@ class Todos extends React.Component {
   
   _handleCheckbox(id) {
     // console.log('fire check', e.target.checked)
-
-    let updatedItem = {...this.props.todoStore.map[id]} 
-    updatedItem.done = !this.props.todoStore.map[id].done;
-    this.props.dispatch(todoActions.sendUpdateTodo(updatedItem)).then(res => {
+    const { dispatch, todoStore } = this.props;
+    let updatedItem = {...todoStore.map[id]} 
+    updatedItem.done = !todoStore.map[id].done;
+    dispatch(todoActions.sendUpdateTodo(updatedItem)).then(res => {
       console.log(res)
       if(res.success) {
         console.log('success');
@@ -76,19 +79,25 @@ class Todos extends React.Component {
   }
   
   render() {
+    const { todoStore } = this.props;
+    const allItems = todoStore.list.all.items;
     return (
       <div>
         <h2>Todos:</h2>
         <ol>
-        {this.props.todoStore.list.all.items.map((id,i) => (
+        { allItems ? 
+          allItems.map((id,i) => (
           <Item
             changeStatus={() => this._handleCheckbox(id)}
             key={i}
             index={i}
-            item={this.props.todoStore.map[id]}
+            item={todoStore.map[id]}
             clearItem={() => this._clearItem(id)}
           />
-        ))}
+          ))
+          :
+          null 
+        }
         </ol>
         <input type="text" value={this.state.newItemText} onChange={this._handleTextChange} />
         <button type="button" onClick={this._handleAddItem}>Add item</button>
