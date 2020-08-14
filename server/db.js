@@ -4,7 +4,7 @@ const hostname = 'localhost';
 const dbName = 'techy';
 
 let TodoList = require('./resources/todoList/TodoListModel.js');
-let TodoItem = require('./resources/todoItem/TodoItemModel.js');
+let Task = require('./resources/task/TaskModel.js');
 
 module.exports = () => {
   mongoose.connect(`mongodb://${hostname}/${dbName}`, {useNewUrlParser: true});

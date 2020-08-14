@@ -8,4 +8,4 @@ module.exports = function(router) {
 }
 
 routeFilenames.push('todoList/todoListsApi');
-routeFilenames.push('todoItem/todoItemsApi');
+routeFilenames.push('task/tasksApi');
