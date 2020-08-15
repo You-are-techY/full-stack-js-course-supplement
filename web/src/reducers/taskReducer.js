@@ -2,14 +2,7 @@
 import { taskActions } from '../actions';
 
 function task(state = {
-  // define fields for a "new" task
-  // a component that creates a new object should store a copy of this in it's state
-  defaultItem: {
-    title: ""
-    , description: ""
-  }
-
-  , map: {} //map of all items
+  map: {} //map of all items
 
   , selected: { //single selected entity
     id: null
@@ -40,7 +33,7 @@ function task(state = {
 }, action) {
   let nextState = Object.assign({}, state, {});
   switch(action.type) {
-//SINGLE ITEM ACTIONS
+    // SINGLE ITEM ACTIONS
     case taskActions.REQUEST_SINGLE_TASK:
       return Object.assign({}, state, {
         selected: {
@@ -193,7 +186,7 @@ function task(state = {
         })
       }
 
-//LIST ACTIONS
+    // LIST ACTIONS
     case taskActions.REQUEST_TASK_LIST:
       nextState = Object.assign({}, state, {});
       nextState.list.all.isFetching = true;
@@ -203,15 +196,13 @@ function task(state = {
     case taskActions.RECEIVE_TASK_LIST:
       nextState = Object.assign({}, state, {});
       if(action.success) {
-        //add api array objects to map
-        //NOTE: should the "all" list overwrite the map? others only add to the map.
+        // add api array objects to map
         let newMap = Object.assign({}, state.map, {});
         let idArray = [];
         for(var i = 0; i < action.list.length; i++) {
           idArray.push(action.list[i]._id);
           newMap[action.list[i]._id] = action.list[i];
         }
-        //if "all" is a just a string type, we could generalize this reducer to any "typed" list
         nextState.list.all.isFetching = false;
         nextState.list.all.error = null;
         nextState.list.all.items = idArray;
@@ -227,31 +218,6 @@ function task(state = {
         nextState.list.all.lastUpdated = action.receivedAt
         return nextState;
       }
-    case taskActions.SET_TASK_FILTER:
-      let newList = Object.assign({}, state.list[action.listType], {});
-      // newList.
-      return Object.assign({}, state, {
-        //TASK
-      })
-
-    case taskActions.SET_TASK_SORT:
-      return Object.assign({}, state, {
-        sortBy: action.sortBy
-        , type: action.listType
-      })
-    case taskActions.SET_TASK_QUERY:
-      return Object.assign({}, state, {
-        query: action.query
-        , listType: action.listType
-      })
-    case taskActions.SET_TASK_PAGINATION:
-      return Object.assign({}, state, {
-        pagination: action.pagination
-      })
-    case taskActions.INVALIDATE_TASK_LIST:
-      let nextState = Object.assign({}, state, {});
-      nextState.list[action.listType].didInvalidate = true;
-      return nextState;
 
     default:
       return state

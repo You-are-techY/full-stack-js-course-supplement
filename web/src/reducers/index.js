@@ -1,3 +1,6 @@
+/**
+ * Combine all reducers
+ */
 import { combineReducers } from 'redux'
 import taskReducer from './taskReducer'
 
