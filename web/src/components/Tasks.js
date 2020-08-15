@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Item from './Item';
 
 // import actions 
-import { taskActions } from '../actions';
+import { taskActions, todoListActions } from '../actions';
 
 class Tasks extends React.Component {
   constructor(props) {
@@ -23,8 +23,8 @@ class Tasks extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(taskActions.fetchList());
+    const { dispatch, match } = this.props;
+    dispatch(todoListActions.fetchSingleTodoListById(match.params.todoListId));
   }
 
   
@@ -79,11 +79,13 @@ class Tasks extends React.Component {
   }
   
   render() {
-    const { taskStore } = this.props;
+    const { match, taskStore, todoListStore } = this.props;
     const allItems = taskStore.list.all.items;
+    const selectedTodoList = todoListStore.map[match.params.todoListId];
     return (
       <div>
-        <h2>Tasks:</h2>
+        <h1>{selectedTodoList ? selectedTodoList.name : null}</h1>
+        <h3>Tasks:</h3>
         <ol>
         { allItems ? 
           allItems.map((id,i) => (
@@ -113,6 +115,7 @@ Tasks.propTypes = {
 const mapStateToProps = (store) => {
   return {
     taskStore: store.taskReducer
+    , todoListStore: store.todoListReducer
   }
 }
 
