@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // import actions 
 import { todoListActions } from '../actions';
@@ -49,11 +50,15 @@ class TodoLists extends React.Component {
     const allItems = todoListStore.list.all.items;
     return (
       <div className="sidebar">
-        <h2>Todo Lists:</h2>
+        <h2>Todo Lists</h2>
         <ul>
         { allItems ? 
           allItems.map((id,i) => (
-            <li key={id}>{todoListStore.map[id].name}</li>
+            <li key={id}>
+              <Link to={`/todos/${id}`}>
+                {todoListStore.map[id].name}
+              </Link>
+            </li>
           ))
           :
           null 

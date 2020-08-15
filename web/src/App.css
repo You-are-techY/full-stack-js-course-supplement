@@ -31,7 +31,7 @@ input {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 270px;
+  width: 300px;
   background-color: #eaeaea;
   padding: 20px;
 }
@@ -43,4 +43,9 @@ input {
 
 .sidebar ul li {
   margin-left: 0;
+}
+
+.main {
+  margin-left: 340px;
+  padding: 20px
 }
