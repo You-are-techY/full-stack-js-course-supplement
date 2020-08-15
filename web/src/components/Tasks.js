@@ -25,9 +25,7 @@ class Tasks extends React.Component {
   componentDidMount() {
     const { dispatch, match } = this.props;
     dispatch(todoListActions.fetchSingleTodoListById(match.params.todoListId));
-    dispatch(taskActions.fetchTasksByTodoList(match.params.todoListId)).then(res => {
-      console.log('done');
-    })
+    dispatch(taskActions.fetchTasksByTodoList(match.params.todoListId));
   }
 
   
@@ -84,15 +82,15 @@ class Tasks extends React.Component {
   
   render() {
     const { match, taskStore, todoListStore } = this.props;
-    const allItems = taskStore.list.all.items;
+    const tasks = taskStore.list.todoList[match.params.todoListId] ? taskStore.list.todoList[match.params.todoListId].items : [];
     const selectedTodoList = todoListStore.map[match.params.todoListId];
     return (
       <div>
         <h1>{selectedTodoList ? selectedTodoList.name : null}</h1>
         <h3>Tasks:</h3>
         <ol>
-        { allItems ? 
-          allItems.map((id,i) => (
+        { tasks ? 
+          tasks.map((id,i) => (
           <Item
             changeStatus={() => this._handleCheckbox(id)}
             key={i}
