@@ -1,8 +1,6 @@
-/****
-combine all actions into one export file
-****/
-
-
+/**
+ * Combine all actions into one export 
+ */
 import * as taskActions from './taskActions';
 import * as todoListActions from './todoListActions';
 

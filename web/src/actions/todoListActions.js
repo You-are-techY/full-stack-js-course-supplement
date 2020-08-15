@@ -1,47 +1,9 @@
-/*****
-SINGLE TODO_LIST CRUD ACTIONS GO HERE
-getById, create, update, delete, etc
-*****/
-
 // import api utility
 import apiUtils from '../utils/api'
 
-// SINGLE TODO_LIST ACTIONS
-
-const shouldFetchSingle = (state, id) => {
-  console.log("do we need to fetch this dodo?");
-  const { map, selected } = state.todoList;
-  if(selected.id !== id) {
-    console.log("this is different from selected in the reducer. yes, let's fetch.");
-    return true;
-  } else if(!map[id]) {
-    console.log("this ID is not in the map. yes, let's fetch.");
-    return true;
-  } else if(selected.isFetching) {
-    console.log("we're already fetching this id. no, do not fetch.");
-    return false;
-  } else {
-    console.log("if the selected reducer has been invalidated, fetch. if not, don't fetch.");
-    return selected.didInvalidate;
-  }
-}
-
-export const INVALIDATE_SELECTED_TODO_LIST = "INVALIDATE_SELECTED_TODO_LIST"
-export function invaldiateSelected() {
-  return {
-    type: INVALIDATE_SELECTED_TODO_LIST
-  }
-}
-
-export const fetchSingleIfNeeded = (id) => (dispatch, getState) => {
-  if (shouldFetchSingle(getState(), id)) {
-    console.log("SHOULD FETCH!");
-    return dispatch(fetchSingleTodoListById(id))
-  } else {
-    console.log("DON'T NEED TO FETCH");
-  }
-}
-
+/**
+ * Single TodoList CRUD actions 
+ */
 export const REQUEST_SINGLE_TODO_LIST = "REQUEST_SINGLE_TODO_LIST";
 function requestSingleTodoList(id) {
   return {
@@ -165,40 +127,9 @@ export function sendDelete(id) {
   }
 }
 
-//TODO_LIST LIST ACTIONS
-
-const shouldFetchList = (state, type) => {
-  console.log("shouldFetchList");
-  //types: "all", "published", etc
-  const list = state.todoList.lists[type];
-  if(!list || !list.items) {
-    console.log("ERROR: CANNOT FIND LIST TYPE: " + type);
-  } else if(list.items.length < 1) {
-    console.log("shouldFetch debug 0");
-    return true
-  } else if(list.isFetching) {
-    console.log("shouldFetch debug 1");
-    return false
-  } else {
-    console.log("shouldFetch debug 2");
-    return list.didInvalidate;
-  }
-}
-
-
-export const fetchListIfNeeded = (type, id) => (dispatch, getState) => {
-  if (shouldFetchList(getState(), type)) {
-    if(type === "all") {
-      return dispatch(fetchList());
-    // } else if(type === "test") {
-    //   //example with an additional byId argument
-    //   return dispatch(fetchListByTest(id));
-    } else {
-      console.log("NO MATCHING LIST TYPE SPECIFIED");
-      return false; //what to return here?
-    }
-  }
-}
+/**
+ * TodoList LIST ACTIONS
+ */ 
 
 export const REQUEST_TODO_LIST_LIST = "REQUEST_TODO_LIST_LIST"
 function requestTodoListList() {
@@ -244,48 +175,3 @@ export function fetchList() {
 
 //MORE LIST TYPES HERE
 
-
-//LIST UTIL METHODS
-export const SET_TODO_LIST_FILTER = "SET_TODO_LIST_FILTER"
-export function setFilter(listType, filter) {
-  return {
-    type: SET_TODO_LIST_FILTER
-    , filter
-    , listType
-  }
-}
-
-export const SET_TODO_LIST_SORT = "SET_TODO_LIST_SORT"
-export function setSortBy(listType, sortBy) {
-  return {
-    type: SET_TODO_LIST_SORT
-    , sortBy
-    , listType
-  }
-}
-
-export const SET_TODO_LIST_QUERY = "SET_TODO_LIST_QUERY"
-export function setQuery(listType, query) {
-  return {
-    type: SET_TODO_LIST_QUERY
-    , query
-    , listType
-  }
-}
-
-export const SET_TODO_LIST_PAGINATION = "SET_TODO_LIST_PAGINATION"
-export function setPagination(listType, pagination) {
-  return {
-    type: SET_TODO_LIST_PAGINATION
-    , pagination
-    , listType
-  }
-}
-
-export const INVALIDATE_TODO_LIST_LIST = "INVALIDATE_TODO_LIST_LIST"
-export function invaldiateList(listType) {
-  return {
-    type: INVALIDATE_TODO_LIST_LIST
-    , listType
-  }
-} 
