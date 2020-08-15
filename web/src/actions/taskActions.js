@@ -243,29 +243,31 @@ export function fetchList() {
 }
 
 
-export const REQUEST_TASK_LIST_BY_TODOS = "REQUEST_TASK_LIST_BY_TODOS"
-function requestTaskListByTodoList() {
+export const REQUEST_TASK_LIST_BY_TODO = "REQUEST_TASK_LIST_BY_TODO"
+function requestTaskListByTodoList(todoListId) {
   console.log('requesting tasks list')
   return {
-    type: REQUEST_TASK_LIST_BY_TODOS
+    type: REQUEST_TASK_LIST_BY_TODO
+    , todoListId
   }
 }
 
-export const RECEIVE_TASK_LIST_BY_TODOS = "RECEIVE_TASK_LIST_BY_TODOS"
-function receiveTaskListByTodoList(json) {
+export const RECEIVE_TASK_LIST_BY_TODO = "RECEIVE_TASK_LIST_BY_TODO"
+function receiveTaskListByTodoList(json, todoListId) {
   return {
-    type: RECEIVE_TASK_LIST_BY_TODOS
+    type: RECEIVE_TASK_LIST_BY_TODO
     , list: json.tasks
     , success: json.success
     , error: json.message
     , receivedAt: Date.now()
+    , todoListId
   }
 }
 
 export function fetchTasksByTodoList(todoListId) {
   // console.log("FETCH TASK LIST");
   return dispatch => {
-    dispatch(requestTaskListByTodoList())
+    dispatch(requestTaskListByTodoList(todoListId))
     return apiUtils.callAPI(`/api/tasks/by-todo-list/${todoListId}`)
       .then(json => {
         if(json.success) {
@@ -281,7 +283,7 @@ export function fetchTasksByTodoList(todoListId) {
           return json;
         }
       })
-      .then(json => dispatch(receiveTaskListByTodoList(json)))
+      .then(json => dispatch(receiveTaskListByTodoList(json, todoListId)))
   }
 }
 

@@ -35,7 +35,7 @@ function task(state = {
     }
     // add other list here, like "published" or "featured"
     // accessed like "task.list.all" or "task.list.published"
-
+    , todoList: {}
   }
 }, action) {
   let nextState = Object.assign({}, state, {});
@@ -227,6 +227,41 @@ function task(state = {
         nextState.list.all.lastUpdated = action.receivedAt
         return nextState;
       }
+    case taskActions.REQUEST_TASK_LIST_BY_TODO:
+      nextState = Object.assign({}, state, {});
+      // set the object 
+      nextState.list.todoList[action.todoListId] = {
+        isFetching: true
+        , error: null
+        , items: []
+      }
+      return nextState;
+    case taskActions.RECEIVE_TASK_LIST_BY_TODO:
+      nextState = Object.assign({}, state, {});
+      if(action.success) {
+        // add api array objects to map
+        let newMap = Object.assign({}, state.map, {});
+        let idArray = [];
+        for(var i = 0; i < action.list.length; i++) {
+          idArray.push(action.list[i]._id);
+          newMap[action.list[i]._id] = action.list[i];
+        }
+        nextState.list.todoList[action.todoListId].isFetching = false;
+        nextState.list.todoList[action.todoListId].error = null;
+        nextState.list.todoList[action.todoListId].items = idArray;
+        nextState.list.todoList[action.todoListId].didInvalidate = false;
+        nextState.list.todoList[action.todoListId].lastUpdated = action.receivedAt
+        nextState.map = newMap;
+        return nextState;
+      } else {
+        nextState.list.todoList[action.todoListId].isFetching = false;
+        nextState.list.todoList[action.todoListId].error = action.error;
+        nextState.list.todoList[action.todoListId].items = [];
+        nextState.list.todoList[action.todoListId].didInvalidate = true;
+        nextState.list.todoList[action.todoListId].lastUpdated = action.receivedAt
+        return nextState;
+      }
+
     case taskActions.SET_TASK_FILTER:
       let newList = Object.assign({}, state.list[action.listType], {});
       // newList.
