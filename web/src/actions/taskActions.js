@@ -242,6 +242,49 @@ export function fetchList() {
   }
 }
 
+
+export const REQUEST_TASK_LIST_BY_TODOS = "REQUEST_TASK_LIST_BY_TODOS"
+function requestTaskListByTodoList() {
+  console.log('requesting tasks list')
+  return {
+    type: REQUEST_TASK_LIST_BY_TODOS
+  }
+}
+
+export const RECEIVE_TASK_LIST_BY_TODOS = "RECEIVE_TASK_LIST_BY_TODOS"
+function receiveTaskListByTodoList(json) {
+  return {
+    type: RECEIVE_TASK_LIST_BY_TODOS
+    , list: json.tasks
+    , success: json.success
+    , error: json.message
+    , receivedAt: Date.now()
+  }
+}
+
+export function fetchListByTodoList(todoListId) {
+  // console.log("FETCH TASK LIST");
+  return dispatch => {
+    dispatch(requestTaskListByTodoList())
+    return apiUtils.callAPI(`/api/tasks/by-todo-list/${todoListId}`)
+      .then(json => {
+        if(json.success) {
+          var itemMap = {};
+          for(var i = 0; i < json.tasks.length; i++) {
+            itemMap[json.tasks[i]._id] = json.tasks[i];
+          }
+          json.itemMap = itemMap;
+          return json;
+
+        } else {
+          //do something with the error
+          return json;
+        }
+      })
+      .then(json => dispatch(receiveTaskListByTodoList(json)))
+  }
+}
+
 //MORE LIST TYPES HERE
 
 
