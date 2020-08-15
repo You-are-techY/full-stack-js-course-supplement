@@ -13,6 +13,19 @@ exports.list = (req, res) => {
   })
 }
 
+exports.getByTodoList = (req, res) => {
+  console.log("fetch all tasks by todo list with id", req.params.todoListId);
+  Task.find({_todoList: req.params.todoListId}).exec((err, tasks) => {
+    if(err || !tasks) {
+      console.log("error!", err);
+      res.send({ success: false, message: err });
+    } else {
+      console.log("Query successful");
+      res.send({ success: true, tasks });
+    }
+  })
+}
+
 exports.getById = (req, res) => {
   console.log("fetch task by _id", req.params.id);
   Task.findById(req.params.id).exec((err, task) => {

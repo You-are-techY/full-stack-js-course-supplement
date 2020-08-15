@@ -9,6 +9,7 @@ module.exports = (router) => {
   
   // - Read
   router.get('/api/tasks', tasks.list);
+  router.get('/api/tasks/by-todo-list/:todoListId', tasks.getByTodoList);
   router.get('/api/tasks/:id', tasks.getById);
   
   // - Update
