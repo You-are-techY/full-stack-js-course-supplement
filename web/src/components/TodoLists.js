@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 // import actions 
 import { todoListActions } from '../actions';
@@ -81,4 +81,4 @@ const mapStateToProps = (store) => {
   }
 }
 
-export default connect(mapStateToProps)(TodoLists);
+export default withRouter(connect(mapStateToProps)(TodoLists));

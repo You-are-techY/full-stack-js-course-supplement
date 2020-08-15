@@ -4,12 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import TodoLists from './components/TodoLists';
-
-const Tasks = ({match}) => {
-  return (
-    <div>Tasks for list id: {match.params.todoListId}</div>
-  )
-}
+import Tasks from './components/Tasks';
 
 class App extends React.Component {
 
