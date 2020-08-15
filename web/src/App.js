@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <Router>
         <div className="todos-app">
-          <TodoLists/>
+          <TodoLists/> 
           <div className="main">
             <Route path="/todos/:todoListId" component={Tasks}/>
           </div>

@@ -45,11 +45,12 @@ class Tasks extends React.Component {
   }
   
   _handleAddItem(e) {
-    const { dispatch } = this.props;
+    const { dispatch, match } = this.props;
     e.preventDefault();
     let newItem = {
       text: this.state.newItemText
       , done: false 
+      , _todoList: match.params.todoListId
     }
     dispatch(taskActions.sendCreateTask(newItem)).then(res =>{
       console.log(res); 
