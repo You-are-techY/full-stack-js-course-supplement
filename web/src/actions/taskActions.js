@@ -1,46 +1,9 @@
-/*****
-SINGLE TASK CRUD ACTIONS GO HERE
-getById, create, update, delete, etc
-*****/
-
 // import api utility
 import apiUtils from '../utils/api'
 
-// SINGLE TASK ACTIONS
-
-const shouldFetchSingle = (state, id) => {
-  console.log("do we need to fetch this dodo?");
-  const { map, selected } = state.task;
-  if(selected.id !== id) {
-    console.log("this is different from selected in the reducer. yes, let's fetch.");
-    return true;
-  } else if(!map[id]) {
-    console.log("this ID is not in the map. yes, let's fetch.");
-    return true;
-  } else if(selected.isFetching) {
-    console.log("we're already fetching this id. no, do not fetch.");
-    return false;
-  } else {
-    console.log("if the selected reducer has been invalidated, fetch. if not, don't fetch.");
-    return selected.didInvalidate;
-  }
-}
-
-export const INVALIDATE_SELECTED_TASK = "INVALIDATE_SELECTED_TASK"
-export function invaldiateSelected() {
-  return {
-    type: INVALIDATE_SELECTED_TASK
-  }
-}
-
-export const fetchSingleIfNeeded = (id) => (dispatch, getState) => {
-  if (shouldFetchSingle(getState(), id)) {
-    console.log("SHOULD FETCH!");
-    return dispatch(fetchSingleTaskById(id))
-  } else {
-    console.log("DON'T NEED TO FETCH");
-  }
-}
+/**
+ * Single Task CRUD actions 
+ */
 
 export const REQUEST_SINGLE_TASK = "REQUEST_SINGLE_TASK";
 function requestSingleTask(id) {
@@ -64,7 +27,6 @@ function receiveSingleTask(json) {
 }
 
 export function fetchSingleTaskById(taskId) {
-  console.log("fetching");
   return dispatch => {
     dispatch(requestSingleTask(taskId))
     return apiUtils.callAPI(`/api/tasks/${taskId}`)
@@ -90,8 +52,6 @@ function requestCreateTask(task) {
 
 export const RECEIVE_CREATE_TASK = "RECEIVE_CREATE_TASK";
 function receiveCreateTask(json) {
-  console.log("RECEIVE_CREATE_TASK");
-  console.log(json);
   return {
     type: RECEIVE_CREATE_TASK
     , id: json.task ? json.task._id : null
@@ -103,7 +63,6 @@ function receiveCreateTask(json) {
 }
 
 export function sendCreateTask(data) {
-  console.log("sendCreateTask")
   return dispatch => {
     dispatch(requestCreateTask(data))
     return apiUtils.callAPI(`/api/tasks`, 'POST', data)
@@ -165,41 +124,9 @@ export function sendDelete(id) {
   }
 }
 
-//TASK LIST ACTIONS
-
-const shouldFetchList = (state, type) => {
-  console.log("shouldFetchList");
-  //types: "all", "published", etc
-  const list = state.task.lists[type];
-  if(!list || !list.items) {
-    console.log("ERROR: CANNOT FIND LIST TYPE: " + type);
-  } else if(list.items.length < 1) {
-    console.log("shouldFetch debug 0");
-    return true
-  } else if(list.isFetching) {
-    console.log("shouldFetch debug 1");
-    return false
-  } else {
-    console.log("shouldFetch debug 2");
-    return list.didInvalidate;
-  }
-}
-
-
-export const fetchListIfNeeded = (type, id) => (dispatch, getState) => {
-  if (shouldFetchList(getState(), type)) {
-    if(type === "all") {
-      return dispatch(fetchList());
-    // } else if(type === "test") {
-    //   //example with an additional byId argument
-    //   return dispatch(fetchListByTest(id));
-    } else {
-      console.log("NO MATCHING LIST TYPE SPECIFIED");
-      return false; //what to return here?
-    }
-  }
-}
-
+/**
+ * TASK LIST ACTIONS
+ */ 
 export const REQUEST_TASK_LIST = "REQUEST_TASK_LIST"
 function requestTaskList() {
   console.log('requesting tasks list')
@@ -242,6 +169,9 @@ export function fetchList() {
   }
 }
 
+/**
+ * MORE LIST TYPES HERE
+ */ 
 
 export const REQUEST_TASK_LIST_BY_TODO = "REQUEST_TASK_LIST_BY_TODO"
 function requestTaskListByTodoList(todoListId) {
@@ -286,51 +216,3 @@ export function fetchTasksByTodoList(todoListId) {
       .then(json => dispatch(receiveTaskListByTodoList(json, todoListId)))
   }
 }
-
-//MORE LIST TYPES HERE
-
-
-//LIST UTIL METHODS
-export const SET_TASK_FILTER = "SET_TASK_FILTER"
-export function setFilter(listType, filter) {
-  return {
-    type: SET_TASK_FILTER
-    , filter
-    , listType
-  }
-}
-
-export const SET_TASK_SORT = "SET_TASK_SORT"
-export function setSortBy(listType, sortBy) {
-  return {
-    type: SET_TASK_SORT
-    , sortBy
-    , listType
-  }
-}
-
-export const SET_TASK_QUERY = "SET_TASK_QUERY"
-export function setQuery(listType, query) {
-  return {
-    type: SET_TASK_QUERY
-    , query
-    , listType
-  }
-}
-
-export const SET_TASK_PAGINATION = "SET_TASK_PAGINATION"
-export function setPagination(listType, pagination) {
-  return {
-    type: SET_TASK_PAGINATION
-    , pagination
-    , listType
-  }
-}
-
-export const INVALIDATE_TASK_LIST = "INVALIDATE_TASK_LIST"
-export function invaldiateList(listType) {
-  return {
-    type: INVALIDATE_TASK_LIST
-    , listType
-  }
-} 
