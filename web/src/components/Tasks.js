@@ -53,12 +53,11 @@ class Tasks extends React.Component {
       , done: false 
       , _todoList: match.params.todoListId
     }
-    dispatch(taskActions.sendCreateTask(newItem)).then(res =>{
-      console.log(res); 
+    dispatch(taskActions.sendCreateTask(newItem)).then(res => {
       if(res.success) {
         // clear text 
         this.setState({newItemText: ''});
-        dispatch(taskActions.fetchList());
+        dispatch(taskActions.fetchTasksByTodoList(match.params.todoListId));
       } else {
         alert("There was an error:", res.message)
       }
