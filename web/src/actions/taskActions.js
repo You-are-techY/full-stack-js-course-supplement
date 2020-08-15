@@ -262,7 +262,7 @@ function receiveTaskListByTodoList(json) {
   }
 }
 
-export function fetchListByTodoList(todoListId) {
+export function fetchTasksByTodoList(todoListId) {
   // console.log("FETCH TASK LIST");
   return dispatch => {
     dispatch(requestTaskListByTodoList())

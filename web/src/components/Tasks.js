@@ -25,6 +25,9 @@ class Tasks extends React.Component {
   componentDidMount() {
     const { dispatch, match } = this.props;
     dispatch(todoListActions.fetchSingleTodoListById(match.params.todoListId));
+    dispatch(taskActions.fetchTasksByTodoList(match.params.todoListId)).then(res => {
+      console.log('done');
+    })
   }
 
   
