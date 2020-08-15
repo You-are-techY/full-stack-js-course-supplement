@@ -28,13 +28,13 @@ exports.getById = (req, res) => {
 
 
 exports.create = (req, res) => {
-  console.log('creating new todo');
+  console.log('creating new task');
   let task = new Task({});
   console.log(req.body);
   // run through and create all fields on the model
   for(var k in req.body) {
     if(req.body.hasOwnProperty(k)) {
-      todo[k] = req.body[k];
+      task[k] = req.body[k];
     }
   }
 
@@ -54,7 +54,7 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  console.log('updating todo');
+  console.log('updating task');
   Task.findById(req.params.id).exec((err, task) => {
     if(err) {
       res.send({ success: false, message: err });
@@ -64,7 +64,7 @@ exports.update = (req, res) => {
       // run through and update all fields on the model
       for(var k in req.body) {
         if(req.body.hasOwnProperty(k)) {
-          todo[k] = req.body[k];
+          task[k] = req.body[k];
         }
       }
       // now edit the 'updated' date
