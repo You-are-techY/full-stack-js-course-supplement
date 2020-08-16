@@ -5,7 +5,7 @@
  */
 
 export { default as user } from '../resources/user/userReducers.js';
-export { default as product } from '../resources/product/productReducers.js';
+
 
 export { default as todoList } from '../resources/todoList/todoListReducers.js';
 export { default as task } from '../resources/task/taskReducers.js';

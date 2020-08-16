@@ -13,7 +13,7 @@
 
 // export { default as admin } from  './AdminRouter.js.jsx';
 export { default as users } from '../resources/user/admin/UserAdminRouter.js.jsx';
-export { default as products } from '../resources/product/admin/ProductAdminRouter.js.jsx';
+
 
 export { default as todoLists } from '../resources/todoList/admin/TodoListAdminRouter.js.jsx';
 export { default as tasks } from '../resources/task/admin/TaskAdminRouter.js.jsx';
