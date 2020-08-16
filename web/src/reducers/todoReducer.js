@@ -2,16 +2,9 @@
 import { todoActions } from '../actions';
 
 function todo(state = {
-  // define fields for a "new" todo
-  // a component that creates a new object should store a copy of this in it's state
-  defaultItem: {
-    title: ""
-    , description: ""
-  }
+  map: {} // map of all items
 
-  , map: {} //map of all items
-
-  , selected: { //single selected entity
+  , selected: { // single selected entity
     id: null
     , isFetching: false
     , error: null
@@ -40,7 +33,7 @@ function todo(state = {
 }, action) {
   let nextState = Object.assign({}, state, {});
   switch(action.type) {
-//SINGLE ITEM ACTIONS
+  // SINGLE ITEM ACTIONS
     case todoActions.REQUEST_SINGLE_TODO:
       return Object.assign({}, state, {
         selected: {
@@ -52,7 +45,7 @@ function todo(state = {
     case todoActions.RECEIVE_SINGLE_TODO:
       if(action.success) {
         console.log("Mapping now");
-        //add object to map
+        // add object to map
         let newMap = Object.assign({}, state.map, {});
         newMap[action.id] = action.item;
         return Object.assign({}, state, {
@@ -97,7 +90,7 @@ function todo(state = {
     case todoActions.RECEIVE_CREATE_TODO:
       console.log("RECEIVE_CREATE_TODO");
       if(action.success) {
-        //add object to map
+        // add object to map
         let newMap = Object.assign({}, state.map, {});
         newMap[action.id] = action.item;
         return Object.assign({}, state, {
@@ -133,7 +126,7 @@ function todo(state = {
 
     case todoActions.RECEIVE_UPDATE_TODO:
       if(action.success) {
-        //add object to map
+        // add object to map
         let newMap = Object.assign({}, state.map, {});
         newMap[action.id] = action.item;
         return Object.assign({}, state, {
@@ -168,7 +161,7 @@ function todo(state = {
       })
     case todoActions.RECEIVE_DELETE_TODO:
       if(action.success) {
-        //remove object from map
+        // remove object from map
         let newMap = Object.assign({}, state.map, {});
         delete newMap[action.id]; //remove key
         return Object.assign({}, state, {
@@ -193,7 +186,7 @@ function todo(state = {
         })
       }
 
-//LIST ACTIONS
+    // LIST ACTIONS
     case todoActions.REQUEST_TODO_LIST:
       nextState = Object.assign({}, state, {});
       nextState.list.all.isFetching = true;
@@ -203,15 +196,13 @@ function todo(state = {
     case todoActions.RECEIVE_TODO_LIST:
       nextState = Object.assign({}, state, {});
       if(action.success) {
-        //add api array objects to map
-        //NOTE: should the "all" list overwrite the map? others only add to the map.
+        // add api array objects to map
         let newMap = Object.assign({}, state.map, {});
         let idArray = [];
         for(var i = 0; i < action.list.length; i++) {
           idArray.push(action.list[i]._id);
           newMap[action.list[i]._id] = action.list[i];
         }
-        //if "all" is a just a string type, we could generalize this reducer to any "typed" list
         nextState.list.all.isFetching = false;
         nextState.list.all.error = null;
         nextState.list.all.items = idArray;
@@ -227,31 +218,6 @@ function todo(state = {
         nextState.list.all.lastUpdated = action.receivedAt
         return nextState;
       }
-    case todoActions.SET_TODO_FILTER:
-      let newList = Object.assign({}, state.list[action.listType], {});
-      // newList.
-      return Object.assign({}, state, {
-        //TODO
-      })
-
-    case todoActions.SET_TODO_SORT:
-      return Object.assign({}, state, {
-        sortBy: action.sortBy
-        , type: action.listType
-      })
-    case todoActions.SET_TODO_QUERY:
-      return Object.assign({}, state, {
-        query: action.query
-        , listType: action.listType
-      })
-    case todoActions.SET_TODO_PAGINATION:
-      return Object.assign({}, state, {
-        pagination: action.pagination
-      })
-    case todoActions.INVALIDATE_TODO_LIST:
-      let nextState = Object.assign({}, state, {});
-      nextState.list[action.listType].didInvalidate = true;
-      return nextState;
 
     default:
       return state
