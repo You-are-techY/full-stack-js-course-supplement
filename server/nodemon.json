@@ -1,8 +1,9 @@
 {
   "verbose": false
-  , "ext": "js html json css"
+  , "ext": "js jade json scss"
   , "ignore": [
-    "public"
+    "web"
+    , "static"
     , "node_modules"
   ]
 }

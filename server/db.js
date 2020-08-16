@@ -1,21 +1,26 @@
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
+let User = require('./resources/user/UserModel');
+let logger = global.logger;
 
-const hostname = 'localhost'; 
-const dbName = 'techy';
-
-let TodoList = require('./resources/todoList/TodoListModel.js');
-let Task = require('./resources/task/TaskModel.js');
-
-module.exports = () => {
-  mongoose.connect(`mongodb://${hostname}/${dbName}`, {useNewUrlParser: true});
-  
-  const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', () => {
-    // we're connected!
-    console.log('mongo connected!');
+module.exports = function(config) {
+  mongoose.Promise = global.Promise; // mongoose internal Promise library depreciated; use native
+  mongoose.connect(config.db, {
+    // useMongoClient: true // deprec. mongoose 5
+  });
+  var db = mongoose.connection;
+  db.on('error', logger.error.bind(console, 'mongo connection error'));
+  db.once('open', function callback() {
+    logger.debug('mongo connection opened');
   });
 
-  // when the server connect, create defaults 
-  TodoList.createDefaults();
-}
+  // any other initial model calls
+  User.createDefaults();
+  Product.createDefaults();
+};
+
+// Yote models are defined below
+let Product = require('./resources/product/ProductModel');
+
+let TodoList = require('./resources/todoList/TodoListModel');
+let Task = require('./resources/task/TaskModel');
+let Comment = require('./resources/comment/CommentModel');

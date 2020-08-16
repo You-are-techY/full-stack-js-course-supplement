@@ -1,3 +1,17 @@
 {
-  "presets": ["@babel/env", "@babel/preset-react"]
-}
+  "presets": [
+    [ "env",
+      {
+        "modules": false,
+        "useBuiltIns": "usage"
+      }
+    ],
+    "react",
+  ],
+  "env": {
+    "test": {
+      "presets": ["react"],
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  }
+} 
