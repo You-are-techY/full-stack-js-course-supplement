@@ -79,17 +79,17 @@
       // display: inline-block;
     }
     .-program {
-      color: $soflete-yellow;
+      color: $yote-yellow;
     }
     .-upcoming-program {
-      background-color: $soflete-yellow;
+      background-color: $yote-yellow;
       opacity: 0.7;
     }
     .-published {
-      color: $soflete-red;
+      color: $yote-red;
     }
     .-draft {
-      color: $soflete-light-red;
+      color: $yote-light-red;
     }
   }
 }
@@ -99,7 +99,7 @@
   // vertical-align: top;
   position: relative;
   &.add-day {
-    background-color: $soflete-yellow;
+    background-color: $yote-yellow;
     @include transition(all 250ms ease-in-out);
     &:hover {
         opacity: 0.9;
@@ -121,66 +121,66 @@
     @include transition(all 250ms ease-in-out);
 
     &.-current {
-      background-color: $soflete-yellow;
+      background-color: $yote-yellow;
       &:hover {
         opacity: 0.9;
       }
     }
     a { color: black; }
     &.-past {
-      background-color: $soflete-gray;
+      background-color: $yote-gray;
     }
     &.-upcoming {
-      background-color: $soflete-yellow;
+      background-color: $yote-yellow;
       opacity: 0.7;
       &:hover {
         opacity: 0.9;
       }
     }
     &.-new {
-      // background-color: $soflete-blue;
+      // background-color: $yote-blue;
     }
   }
 
   &.-workout {
     height: 30px;
-    // background-color: $soflete-light-red;
+    // background-color: $yote-light-red;
     background-color: white;
-    border: 1px solid $soflete-light-red;
-    color: $soflete-light-red;
+    border: 1px solid $yote-light-red;
+    color: $yote-light-red;
     &:hover {
         opacity: 0.8;
       }
     @include transition(all 250ms ease-in-out);
     &.-past {
-      background-color: $soflete-light-gray;
+      background-color: $yote-light-gray;
       border: none;
       color: white;
       &.-published {
-        background-color: $soflete-light-gray;
+        background-color: $yote-light-gray;
       }
     }
     &.-upcoming {
       background-color: white;
-      border: 1px solid $soflete-light-red;
-      color: $soflete-light-red;
+      border: 1px solid $yote-light-red;
+      color: $yote-light-red;
       opacity: 0.7;
       &:hover {
         opacity: 0.9;
       }
       &.-published {
-        background-color: $soflete-red;
-        border-color: $soflete-red;
+        background-color: $yote-red;
+        border-color: $yote-red;
         color: white;
       }
       &.-none {
-        color: $soflete-green;
-        border-color: $soflete-green;
+        color: $yote-green;
+        border-color: $yote-green;
       }
     }
     &.-published {
-      background-color: $soflete-red;
-      border-color: $soflete-red;
+      background-color: $yote-red;
+      border-color: $yote-red;
       color: white;
       a { color: white; }
       &:hover {
@@ -188,8 +188,8 @@
       }
     }
     &.-none {
-      color: $soflete-green;
-      border-color: $soflete-green;
+      color: $yote-green;
+      border-color: $yote-green;
       border:none;
       opacity: 0.4;
       background-color: transparent;
@@ -203,8 +203,8 @@
 .-program.-new {
   @include transition(all 250ms ease-in-out);
   opacity: 0.4;
-  color: $soflete-blue;
-  border-color: $soflete-blue;
+  color: $yote-blue;
+  border-color: $yote-blue;
   background-color: transparent;
   &:hover {
     opacity: 1;

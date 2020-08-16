@@ -245,18 +245,18 @@ a.yt-btn,
 // sf-blue
 [yt-btn~="sf-blue"],
 .yt-btn.sf-blue {
-  background-color: $soflete-blue;
-  // border-color: $soflete-blue-hover;
+  background-color: $yote-blue;
+  // border-color: $yote-blue-hover;
   color: $white;
 
   &:visited { color: $white; }
   &:hover {
-    background-color: darken($soflete-blue, 10);
+    background-color: darken($yote-blue, 10);
     color: $white;
   }
   &:active {
     color: $white;
-    background-color: lighten($soflete-blue, 10);
+    background-color: lighten($yote-blue, 10);
   }
 
 }
@@ -265,18 +265,18 @@ a.yt-btn,
 // sf-green
 [yt-btn~="sf-green"],
 .yt-btn.sf-green {
-  background-color: $soflete-green;
-  // border-color: $soflete-green-hover;
+  background-color: $yote-green;
+  // border-color: $yote-green-hover;
   color: $white;
 
   &:visited { color: $white; }
   &:hover {
-    background-color: darken($soflete-green, 10);
+    background-color: darken($yote-green, 10);
     color: $white;
   }
   &:active {
     color: $white;
-    background-color: lighten($soflete-green, 10);
+    background-color: lighten($yote-green, 10);
   }
 
 }
@@ -369,12 +369,12 @@ a.yt-btn.white-bg,
   }
 
   &.fowler {
-    color: $soflete-blue;
+    color: $yote-blue;
     &:hover {
       &:visited { color: lighten($info, 4); }
       &:hover {  background-color:$gray-8; color: darken($info,10); }
 
-      &:active { background-color: lighten($soflete-blue, 4); }
+      &:active { background-color: lighten($yote-blue, 4); }
     }
   }
 
@@ -438,11 +438,11 @@ a.yt-btn.link,
   }
 
   &.fowler {
-    color: $soflete-blue;
+    color: $yote-blue;
     &:hover {
-      &:visited { color: lighten($soflete-blue, 4); }
-      &:hover {  background-color:$gray-8; color: darken($soflete-blue,10); }
-      &:active { background-color: lighten($soflete-blue, 4); }
+      &:visited { color: lighten($yote-blue, 4); }
+      &:hover {  background-color:$gray-8; color: darken($yote-blue,10); }
+      &:active { background-color: lighten($yote-blue, 4); }
     }
   }
 
@@ -466,10 +466,10 @@ a.yt-btn.link,
 
 
   &.red {
-    color: $soflete-red;
+    color: $yote-red;
     &:hover {
-      &:visited { color: lighten($soflete-red, 4); }
-      &:active { background-color: lighten($soflete-red, 4); }
+      &:visited { color: lighten($yote-red, 4); }
+      &:active { background-color: lighten($yote-red, 4); }
     }
   }
 

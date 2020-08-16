@@ -28,7 +28,7 @@ class Hero extends React.Component {
       secondsElapsed: 0
       , coolThing: "apps"
       , coolThingIndex: 0
-      , coolThingsList : [ "blogs", "dashboards",  "experiments", "products", "art", "apps"]
+      , coolThingsList : [ "school",  "work", "life", "house"]
     };
   }
 
@@ -61,9 +61,8 @@ class Hero extends React.Component {
     return (
       <div styleName="landingStyles.hero" className="hero">
         <div className="yt-container">
-          <img src="/img/howler.png" />
-          <h1 styleName="h1">This is Yote</h1>
-          <h2 styleName="h2">
+          <h1>TechY Todos</h1>
+          <h2>
             <TransitionGroup
               exit={false}
             >
@@ -76,7 +75,7 @@ class Hero extends React.Component {
               </Fade>
             </TransitionGroup>
           </h2>
-          <p> You can use it to make cool stuff </p>
+          <p> A sample todo list app by You are techY </p>
         </div>
       </div>
     )

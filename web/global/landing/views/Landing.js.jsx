@@ -15,7 +15,6 @@ import DefaultTopNav from '../../../global/components/navigation/DefaultTopNav.j
 
 // import landing page components
 import LandingHero from '../components/LandingHero.js.jsx';
-import LandingNav from '../components/LandingNav.js.jsx';
 
 class Landing extends Binder {
   constructor(props, context) {
@@ -53,7 +52,7 @@ class Landing extends Binder {
         />
         <LandingHero />
         <div className="hero sub u-centerText">
-          <p> Check out the docs on <a href="https://fugitivelabs.github.io/yote/"> GitHub </a></p>
+          <p> Check out the docs on <a href="https://github.com/You-are-techY/full-stack-js-course-supplement/tree/module-5/lesson-1/chapter-1"> GitHub </a></p>
         </div>
         <div style={{height: '600px'}}></div>
       </div>

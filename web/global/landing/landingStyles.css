@@ -10,7 +10,7 @@
   background-image: url(/img/hero-1.png);
   background-size: cover;
   background-position: center center;
-  background-color: #C20032;
+  background-color: rgb(167,86,136);
   padding-top: $topbar-height;
   text-align: center;
   color: rgba(255,255,255,0.89);
@@ -24,19 +24,4 @@
   height: 600px;
 }
 
-.h1 {
-  margin: 0;
-  margin-bottom: 20px;
-}
-.h2 {
-  font-weight: 300;
-  color: rgba(255,255,255,0.9);
-  font-size: 4rem;
-  line-height: 1.5;
-  margin: 0;
-}
-.h3 {
-  font-weight: 500;
-  color: rgba(255,255,255,0.95);
 
-}

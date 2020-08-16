@@ -3,22 +3,17 @@
 // Brand Palette
 // ••••••••••••••••••••••••••••••••••••••••••••••••••
 
-$brand-primary:               #000;
-$brand-secondary:             #352D39;
-$brand-accent:                #C20032;
+$brand-primary:               rgb(167,86,136);
+$brand-secondary:             #46b3e2;
+$brand-accent:                #352D39;
 
-$workout-color:               #588728;
-$section-color:               #99040E;
-$exercise-color:              #2A95E3;
-$movement-color:              #F58A12;
-
-$soflete-green:               #588728;
-$soflete-red:               #99040E;
-$soflete-light-red:         #F35660;
-$soflete-blue:              #2A95E3;
-$soflete-yellow:              #F58A12;
-$soflete-gray:                #858484;
-$soflete-light-gray:          #B7B7B7;
+$yote-green:               #588728;
+$yote-red:               #99040E;
+$yote-light-red:         #F35660;
+$yote-blue:              #2A95E3;
+$yote-yellow:              #F58A12;
+$yote-gray:                #858484;
+$yote-light-gray:          #B7B7B7;
 
 // UI Palette
 // ••••••••••••••••••••••••••••••••••••••••••••••••••
@@ -35,7 +30,7 @@ $muted-text:                  rgba(0,0,0,0.24);
 $text-light:                  rgba(255,255,255,.9);
 $accent-color:                $brand-accent;
 
-$link-color:                  #F08F0F;
+$link-color:                  $brand-secondary;
 $link-visited-color:          $link-color;
 $link-hover-color:            lighten($link-color, 20);
 

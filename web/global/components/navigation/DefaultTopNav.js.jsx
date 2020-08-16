@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import Binder from '../Binder.js.jsx';
 import CloseWrapper from '../helpers/CloseWrapper.js.jsx';
 import ProfileDropdown from './ProfileDropdown.js.jsx';
+import ProfilePic from './ProfilePic.js.jsx';
 
 import { MAIN_NAV_ITEMS } from '../../../config/navItems.js';
 
@@ -121,8 +122,7 @@ class DefaultTopNav extends Binder {
           />
           <div className="titles">
             <NavLink to="/" className="nav-logo" >
-              <img src="/img/yote_logo.png"/>
-              <span className="-subtitle"> Standard Yote Dev Kit </span>
+              You are techY
             </NavLink>
           </div>
           <div className="actions">
@@ -136,8 +136,7 @@ class DefaultTopNav extends Binder {
                 { loggedInUser && loggedInUser._id ?
                   <li className="dropdown">
                     <a onClick={() => this.setState({profileOpen: true})}>
-                      <div className="-profile-pic" style={profileImg} />
-                      <i className="fa fa-caret-down"></i>
+                      <ProfilePic user={loggedInUser}/>
                     </a>
                     <ProfileDropdown
                       close={() => this.setState({profileOpen: false})}

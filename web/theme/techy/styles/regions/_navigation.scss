@@ -8,8 +8,8 @@ a.nav-logo,
 .nav-logo {
   @include display-flex;
   @include align-items(center);
-  @include large-font;
-  color: $text-color;
+  @include base-font;
+  color: $brand-primary;
   font-weight: 700;
   height: $header-height;
   svg {
