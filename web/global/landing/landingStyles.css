@@ -12,12 +12,13 @@
   background-position: center center;
   background-color: rgb(167,86,136);
   padding-top: $topbar-height;
-  text-align: center;
+  text-align: left;
   color: rgba(255,255,255,0.89);
 }
 
 .cool-thing {
-  color: #fff;
+  color: #46b3e2;
+  display: inline-block;
 }
 
 .tallboy {

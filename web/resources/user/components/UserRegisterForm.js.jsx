@@ -24,7 +24,7 @@ const UserRegisterForm = ({
   return (
     <div className="form-container -skinny">
       <form name="userForm" className="user-form" onSubmit={handleFormSubmit}>
-        <h2> Register for Yote</h2>
+        <h2> Register </h2>
         <hr/>
         <EmailInput
           change={handleFormChange}

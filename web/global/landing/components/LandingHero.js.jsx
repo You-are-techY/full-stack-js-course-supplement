@@ -26,9 +26,9 @@ class Hero extends React.Component {
     super(props);
     this.state = {
       secondsElapsed: 0
-      , coolThing: "apps"
+      , coolThing: "projects"
       , coolThingIndex: 0
-      , coolThingsList : [ "school",  "work", "life", "house"]
+      , coolThingsList : [ "school",  "work", "life"]
     };
   }
 
@@ -62,20 +62,21 @@ class Hero extends React.Component {
       <div styleName="landingStyles.hero" className="hero">
         <div className="yt-container">
           <h1>TechY Todos</h1>
-          <h2>
-            <TransitionGroup
-              exit={false}
-            >
-              <Fade  key={this.state.coolThing}>
-                <span
-                  styleName="cool-thing"
-                >
-                  {this.state.coolThing}
-                </span>
-              </Fade>
-            </TransitionGroup>
-          </h2>
           <p> A sample todo list app by You are techY </p>
+          <h3> Keep track of 
+            <span>
+              <TransitionGroup
+                exit={false}
+                style={{display: 'inline-block', marginLeft: '8px'}}
+              >
+                <Fade  key={this.state.coolThing}>
+                  <span styleName="cool-thing">  {this.state.coolThing} </span>
+                </Fade>
+              </TransitionGroup>
+            </span>
+          </h3>
+          <br/>
+          <Link className="yt-btn x-large" to="/user/register">Get Started</Link>
         </div>
       </div>
     )

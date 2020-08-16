@@ -26,9 +26,9 @@ class TodoListRouter extends Binder {
   render() {
     return (
       <Switch>
-        <YTRoute exact path="/todo-lists" component={TodoListList} />
+        <YTRoute exact login={true} path="/todo-lists" component={TodoListList} />
         <YTRoute exact login={true} path="/todo-lists/new" component={CreateTodoList} />
-        <YTRoute exact path="/todo-lists/:todoListId" component={SingleTodoList}/>
+        <YTRoute exact login={true} path="/todo-lists/:todoListId" component={SingleTodoList}/>
         <YTRoute exact login={true} path="/todo-lists/:todoListId/update" component={UpdateTodoList}/>
       </Switch>
     )

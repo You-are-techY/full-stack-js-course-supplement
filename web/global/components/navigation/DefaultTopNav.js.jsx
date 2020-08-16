@@ -128,11 +128,15 @@ class DefaultTopNav extends Binder {
           <div className="actions">
             <div className="yt-row center-vert right">
               <ul className="navigation">
-                { MAIN_NAV_ITEMS.map((item, i) =>
-                  <li key={i}>
-                    <NavLink to={item.path} activeClassName="active">{item.display}</NavLink>
-                  </li>
-                )}
+                { loggedInUser && loggedInUser._id ?
+                  MAIN_NAV_ITEMS.map((item, i) =>
+                    <li key={i}>
+                      <NavLink to={item.path} activeClassName="active">{item.display}</NavLink>
+                    </li>
+                  )
+                  :
+                  null 
+                }
                 { loggedInUser && loggedInUser._id ?
                   <li className="dropdown">
                     <a onClick={() => this.setState({profileOpen: true})}>
