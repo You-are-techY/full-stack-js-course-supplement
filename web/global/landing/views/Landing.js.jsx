@@ -20,7 +20,7 @@ import LandingNav from '../components/LandingNav.js.jsx';
 class Landing extends Binder {
   constructor(props, context) {
     super(props);
-    this.state = this.props;
+    this.state = {};
     this._bind(
       '_handleScroll'
     )
