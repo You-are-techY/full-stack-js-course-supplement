@@ -11,20 +11,24 @@ The source code for the finished application can be found in the "production" br
 
 -- 
 
-## Notes for Module 4
+## Notes for Module 5
 
-We're using some Senior Developer magic setup here with webpack and babel. 
+This is a production level application built with the full stack javascript framework, [Yote](https://fugitivelabs.github.io/yote/)
 
 To run, open two terminal windows.  In the first:
 ```bash 
 $ cd server 
 $ npm install
-$ nodemon server.js
+$ nodemon 
 ```
 And in the second:
 ```bash
 $ cd web 
 $ npm install 
-$ npm run watch 
+$ npm run debug
 ```
 The app will be listening on `localhost:3030` as normal.  
+
+There are two default users created, an admin user named Jane Doe (jane.doe@youaretechy.com) and a standard user named Erika Smith (erika.smith@youaretechy.com).  Passwords for each user are **techy**. 
+
+Some of the routes and actions are login protected and/or admin protected. So you'll have to log into one or another user to complete the code challenge.  
