@@ -14,6 +14,7 @@ import * as userActions from '../../../resources/user/userActions';
 
 // import components
 import Binder from '../Binder.js.jsx';
+import ProfilePic from './ProfilePic.js.jsx';
 
 class ProfileDropdown extends Binder {
   constructor(props) {
@@ -54,7 +55,7 @@ class ProfileDropdown extends Binder {
           <ul className="dropMenu">
             <div>
               <li className="-drop-header">
-                <div className="-profile-pic" style={profileImg} />
+                <ProfilePic user={user}/>
                 <div className="-profile-info">
                   {user.firstName + " "} {user.lastName}
                   <br/>

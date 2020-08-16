@@ -3,3 +3,49 @@
  */
 
  
+
+
+ .-user-initials {
+  height: $gutter * 3;
+  width: $gutter * 3;
+  @include display-flex;
+  @include justify-content(center);
+  @include align-items(center);
+  background: $brand-accent;
+  font-style: $font-sans;
+  @include medium-font;
+  font-weight: 600;
+  border-radius: 50%;
+  margin-right: $gutter;
+  &.-nav {
+    height: $header-height * 0.5;
+    width: $header-height * 0.5;
+    @include base-font;
+    margin-right: $gutter * 0.5;
+  }
+  &.-small {
+    height: $gutter * 2;
+    width: $gutter * 2;
+    @include base-font;
+    margin-right: $gutter * 0.5;
+  }
+  &.-large {
+    height: $gutter * 4;
+    width: $gutter * 4;
+    @include large-font;
+    margin-right: $gutter;
+  }
+  &.-jumbo {
+    height: $gutter * 6;
+    width: $gutter * 6;
+    font-size: 3rem;
+    margin-right: $gutter-width;
+  }
+  &.-avatar {
+    height: 120px;
+    width: 120px;
+    font-size: 3rem;
+    margin-right: $gutter-width;
+  }
+
+}
