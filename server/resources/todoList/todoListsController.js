@@ -198,6 +198,8 @@ exports.create = (req, res) => {
     }
   }
 
+  todoList._createdBy = req.user._id;
+
   todoList.save((err, todoList) => {
     if (err) {
       logger.error("ERROR:");

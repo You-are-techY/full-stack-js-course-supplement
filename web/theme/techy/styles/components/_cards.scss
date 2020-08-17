@@ -120,6 +120,7 @@ $card-padding: $gutter * 0.5;
       @include box-shadow(0 8px 24px $shadow-color);
       &.linkable {
         cursor: pointer;
+        color: $text-color;
         img {
         }
         .title {

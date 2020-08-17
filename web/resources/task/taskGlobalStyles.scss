@@ -5,3 +5,28 @@
  */
 
 @import "./admin/taskAdminStyles";
+
+.-task-item {
+  @include display-flex;
+  @include align-items(flex-start);
+  margin-bottom: $gutter;
+  // padding: 8px 0;
+  .-icon {
+    margin-right: $gutter;
+    .-checkbox {
+      &:hover {
+        cursor: pointer;
+      }
+      &.-done {
+        color: $success;
+      }
+    }
+  }
+  .-copy {
+    @include flex(1);
+  }
+  .-text {
+    @include medium-font;
+    font-weight: 500;
+  }
+}

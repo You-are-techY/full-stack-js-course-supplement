@@ -19,6 +19,7 @@ import * as todoListActions from '../todoListActions';
 
 // import global components
 import Binder from '../../../global/components/Binder.js.jsx';
+import Breadcrumbs from '../../../global/components/navigation/Breadcrumbs.js.jsx';
 
 // import resource components
 import TodoListForm from '../components/TodoListForm.js.jsx';
@@ -98,6 +99,7 @@ class UpdateTodoList extends Binder {
 
     return  (
       <TodoListLayout>
+        <Breadcrumbs links={location.state.breadcrumbs} />
         { isEmpty ?
           (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           :

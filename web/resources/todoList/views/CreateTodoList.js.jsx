@@ -63,6 +63,7 @@ class CreateTodoList extends Binder {
   _handleFormSubmit(e) {
     const { dispatch, history } = this.props;
     e.preventDefault();
+
     dispatch(todoListActions.sendCreateTodoList(this.state.todoList)).then(todoListRes => {
       if(todoListRes.success) {
         dispatch(todoListActions.invalidateList("all"));
@@ -85,8 +86,8 @@ class CreateTodoList extends Binder {
           :
           <TodoListForm
             todoList={todoList}
-            cancelLink="/todoLists"
-            formTitle="Create TodoList"
+            cancelLink="/todo-lists"
+            formTitle="Create Todo List"
             formType="create"
             handleFormChange={this._handleFormChange}
             handleFormSubmit={this._handleFormSubmit}
@@ -108,6 +109,7 @@ const mapStoreToProps = (store) => {
   */
   return {
     defaultTodoList: store.todoList.defaultItem
+    , loggedInUser: store.user.loggedIn.user 
   }
 }
 

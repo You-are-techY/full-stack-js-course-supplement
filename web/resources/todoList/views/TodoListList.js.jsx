@@ -18,6 +18,7 @@ import * as todoListActions from '../todoListActions';
 
 // import global components
 import Binder from '../../../global/components/Binder.js.jsx';
+import Breadcrumbs from '../../../global/components/navigation/Breadcrumbs.js.jsx';
 
 // import resource components
 import TodoListLayout from '../components/TodoListLayout.js.jsx';
@@ -29,12 +30,13 @@ class TodoListList extends Binder {
   }
 
   componentDidMount() {
+    const { dispatch, loggedInUser } = this.props;
     // fetch a list of your choice
-    this.props.dispatch(todoListActions.fetchListIfNeeded('all')); // defaults to 'all'
+    dispatch(todoListActions.fetchListIfNeeded('_createdBy', loggedInUser._id)); // defaults to 'all'
   }
 
   render() {
-    const { todoListStore } = this.props;
+    const { location, loggedInUser, todoListStore } = this.props;
 
     /**
      * Retrieve the list information and the list items for the component here.
@@ -46,13 +48,13 @@ class TodoListList extends Binder {
      */
 
     // get the todoListList meta info here so we can reference 'isFetching'
-    const todoListList = todoListStore.util.getListInfo("all");
+    const todoListList = todoListStore.util.getListInfo("_createdBy", loggedInUser._id);
 
     /**
      * use the reducer getList utility to convert the all.items array of ids
      * to the actual todoList objetcs
      */
-    const todoListListItems = todoListStore.util.getList("all");
+    const todoListListItems = todoListStore.util.getList("_createdBy", loggedInUser._id);
 
     /**
      * NOTE: isEmpty is is usefull when the component references more than one
@@ -71,19 +73,21 @@ class TodoListList extends Binder {
 
     return (
       <TodoListLayout>
-        <h1> Todo List List </h1>
+        <Breadcrumbs links={location.state.breadcrumbs} />
+        <h1> My todo lists </h1>
         <hr/>
-        <Link to={'/todo-lists/new'}> New Todo List </Link>
-        <br/>
+        <div className="yt-row right">
+          <Link className="yt-btn x-small " to={'/todo-lists/new'}> New Todo List </Link>
+        </div>
         { isEmpty ?
           (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
           :
           <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-            <ul>
+            <div className="yt-row with-gutters">
               {todoListListItems.map((todoList, i) =>
                 <TodoListListItem key={todoList._id + i} todoList={todoList} />
               )}
-            </ul>
+            </div>
           </div>
         }
       </TodoListLayout>
@@ -101,7 +105,8 @@ const mapStoreToProps = (store) => {
   * differentiated from the React component's internal state
   */
   return {
-    todoListStore: store.todoList
+    loggedInUser: store.user.loggedIn.user 
+    , todoListStore: store.todoList
   }
 }
 

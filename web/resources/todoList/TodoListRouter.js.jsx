@@ -18,18 +18,53 @@ import TodoListList from './views/TodoListList.js.jsx';
 import SingleTodoList from './views/SingleTodoList.js.jsx';
 import UpdateTodoList from './views/UpdateTodoList.js.jsx';
 
+// import task views 
+import SingleTask from '../task/views/SingleTask.js.jsx';
+
 class TodoListRouter extends Binder {
   constructor(props) {
     super(props);
   }
 
   render() {
+    let singleTodoListPath = this.props.location.pathname.replace('/update', '');
     return (
       <Switch>
-        <YTRoute exact login={true} path="/todo-lists" component={TodoListList} />
-        <YTRoute exact login={true} path="/todo-lists/new" component={CreateTodoList} />
-        <YTRoute exact login={true} path="/todo-lists/:todoListId" component={SingleTodoList}/>
-        <YTRoute exact login={true} path="/todo-lists/:todoListId/update" component={UpdateTodoList}/>
+        <YTRoute 
+          breadcrumbs={[{display: 'My todos', path: null}]}
+          component={TodoListList} 
+          exact 
+          login={true} 
+          path="/todo-lists" 
+        />
+        <YTRoute 
+          breadcrumbs={[{display: 'My todos', path: '/todo-lists'}, {display: 'New', path: null}]}
+          component={CreateTodoList} 
+          exact 
+          login={true} 
+          path="/todo-lists/new" 
+        />
+        <YTRoute 
+          breadcrumbs={[{display: 'My todos', path: '/todo-lists'}, {display: 'List details', path: null}]}
+          component={SingleTodoList}
+          exact 
+          login={true} 
+          path="/todo-lists/:todoListId" 
+        />
+        <YTRoute 
+          breadcrumbs={[{display: 'My todos', path: '/todo-lists'}, {display: 'List details', path: singleTodoListPath}, {display: 'Update', path: null}]}
+          component={UpdateTodoList}
+          exact 
+          login={true} 
+          path="/todo-lists/:todoListId/update" 
+        />
+        <YTRoute 
+          breadcrumbs={[{display: 'My todos', path: '/todo-lists'}, {display: 'List details', path: singleTodoListPath}, {display: 'Task info', path: null}]}
+          component={SingleTask}
+          exact 
+          login={true} 
+          path="/todo-lists/:todoListId/task/:taskId" 
+        />
       </Switch>
     )
   }

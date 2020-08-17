@@ -8,10 +8,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // import form components
-import { TextInput } from '../../../global/components/forms';
+import { TextInput, TextAreaInput } from '../../../global/components/forms';
 
 const  TaskForm = ({
-  cancelLink
+  cancel
   , formHelpers
   , formTitle
   , formType
@@ -24,7 +24,7 @@ const  TaskForm = ({
   const buttonText = formType === "create" ? "Create Task" : "Update Task";
 
   // set the form header
-  const header = formTitle ? <div className="formHeader"><h2> {formTitle} </h2><hr/></div> : <div/>;
+  const header = formTitle ? <div className="formHeader"><h2> {formTitle} </h2></div> : <div/>;
 
   return (
     <div className="yt-container">
@@ -34,15 +34,21 @@ const  TaskForm = ({
             {header}
             <TextInput
               change={handleFormChange}
-              label="Name"
-              name="task.name"
-              placeholder="Name (required)"
+              name="task.text"
+              placeholder="Describe this task"
               required={true}
-              value={task.name}
+              value={task.text || ""}
+            />
+            <TextAreaInput
+              change={handleFormChange}
+              name="task.notes"
+              placeholder="Add extra details about this task"
+              required={false}
+              value={task.notes || ""}
             />
             <div className="input-group">
               <div className="yt-row space-between">
-                <Link className="yt-btn link" to={cancelLink}>Cancel</Link>
+                <button className="yt-btn link" onClick={cancel}>Cancel</button>
                 <button className="yt-btn " type="submit" > {buttonText} </button>
               </div>
             </div>
@@ -54,7 +60,7 @@ const  TaskForm = ({
 }
 
 TaskForm.propTypes = {
-  cancelLink: PropTypes.string.isRequired
+  cancel: PropTypes.func.isRequired
   , formHelpers: PropTypes.object
   , formTitle: PropTypes.string
   , formType: PropTypes.string.isRequired

@@ -5,3 +5,12 @@
  */
 
 @import "./admin/todoListAdminStyles";
+
+a.-todo-card {
+  color: $text-color;
+  height: 175px;
+  .-title {
+    @include large-font;
+    margin: 8px 0;
+  }
+}

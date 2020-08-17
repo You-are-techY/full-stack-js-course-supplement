@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // import form components
-import { TextInput } from '../../../global/components/forms';
+import { TextInput, TextAreaInput } from '../../../global/components/forms';
 
 const  TodoListForm = ({
   cancelLink
@@ -21,7 +21,7 @@ const  TodoListForm = ({
 }) => {
 
   // set the button text
-  const buttonText = formType === "create" ? "Create Todo List" : "Update Todo List";
+  const buttonText = formType === "create" ? "Create List" : "Update Todo List";
 
   // set the form header
   const header = formTitle ? <div className="formHeader"><h2> {formTitle} </h2><hr/></div> : <div/>;
@@ -38,7 +38,15 @@ const  TodoListForm = ({
               name="todoList.name"
               placeholder="Name (required)"
               required={true}
-              value={todoList.name}
+              value={todoList.name || ""}
+            />
+            <TextAreaInput
+              change={handleFormChange}
+              label="Name"
+              name="todoList.description"
+              placeholder="Description"
+              required={false}
+              value={todoList.description || ""}
             />
             <div className="input-group">
               <div className="yt-row space-between">

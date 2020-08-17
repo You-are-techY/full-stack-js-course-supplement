@@ -99,24 +99,24 @@ a.yt-btn,
 [yt-btn~="x-large"],
 .yt-btn.x-large {
   @include medium-font;
-  padding: 18px 68px;
+  padding: 18px 66px;
 }
 
 [yt-btn~="large"],
 .yt-btn.large {
-  padding: 16px 32px;
+  padding: 16px 48px;
   // @include medium-font;
 }
 
 [yt-btn~="small"],
 .yt-btn.small {
-  padding: 8px 16px;
+  padding: 12px 36px;
   @include small-font;
 }
 
 [yt-btn~="x-small"],
 .yt-btn.x-small {
-  padding: 4px 8px;
+  padding: 8px 20px;
   @include smaller-font;
 }
 

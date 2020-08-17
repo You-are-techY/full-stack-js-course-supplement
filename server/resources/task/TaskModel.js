@@ -21,7 +21,7 @@ const taskSchema = mongoose.Schema({
 
   // specific values for task go below
   , text:                   { type: String, required: '{PATH} is required!' }
-  , description:            { type: String }
+  , notes:                  { type: String } // special details about this task 
   , status:                 { type: String, enum: ['open', 'done', 'archived'], default: 'open' }
 
   // relations 

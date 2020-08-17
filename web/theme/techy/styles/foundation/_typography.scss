@@ -39,7 +39,7 @@ h1 {
 }
 
 h2 {
-  @include larger-font;
+  @include large-font;
   line-height: 1;
   &.light-weight {
     font-family: $font-sans;
@@ -47,7 +47,7 @@ h2 {
 }
 
 h3 {
-  @include large-font;
+  @include medium-font;
   line-height: 1;
   &.light-weight {
     font-family: $font-sans;
