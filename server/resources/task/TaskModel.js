@@ -20,8 +20,14 @@ const taskSchema = mongoose.Schema({
   , updated:                { type: Date, default: Date.now }
 
   // specific values for task go below
-  , name:                   { type: String, required: '{PATH} is required!' }
+  , text:                   { type: String, required: '{PATH} is required!' }
+  , notes:                  { type: String } // special details about this task 
+  , status:                 { type: String, enum: ['open', 'done', 'archived'], default: 'open' }
 
+  // relations 
+  , _todoList:              { type: ObjectId, ref: 'TodoList' }
+  , _createdBy:             { type: ObjectId, ref: 'User' }
+  , _completedBy:           { type: ObjectId, ref: 'User' }
 });
 
 // task instance methods go here
