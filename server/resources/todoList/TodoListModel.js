@@ -21,10 +21,7 @@ const todoListSchema = mongoose.Schema({
 
   // specific values for todoList go below
   , name:                   { type: String, required: '{PATH} is required!' }
-  , description:            { type: String }
 
-  // relations 
-  , _createdBy:             { type: ObjectId, ref: 'User' }
 });
 
 // todoList instance methods go here

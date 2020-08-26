@@ -14,13 +14,13 @@ module.exports = function(router, requireLogin, requireRole) {
   router.post('/api/todo-lists'               , requireLogin(), todoLists.create); // must login by default
 
   // - Read
-  router.get('/api/todo-lists'                , requireRole('admin'), todoLists.list);
+  router.get('/api/todo-lists'                , todoLists.list);
   // router.get('/api/todo-lists/search'         , todoLists.search); //disabled by default
-  router.get('/api/todo-lists/by-:refKey/:refId*'  , requireLogin(), todoLists.listByRefs);
-  router.get('/api/todo-lists/by-:refKey-list'    , requireLogin(), todoLists.listByValues);
-  router.get('/api/todo-lists/default'        , requireLogin(), todoLists.getDefault);
+  router.get('/api/todo-lists/by-:refKey/:refId*'  , todoLists.listByRefs);
+  router.get('/api/todo-lists/by-:refKey-list'    , todoLists.listByValues);
+  router.get('/api/todo-lists/default'        , todoLists.getDefault);
   // router.get('/api/todo-lists/schema'         , requireRole('admin'), todoLists.getSchema);
-  router.get('/api/todo-lists/:id'            , requireLogin(), todoLists.getById);
+  router.get('/api/todo-lists/:id'            , todoLists.getById);
 
   // - Update
   router.put('/api/todo-lists/:id'            , requireLogin(), todoLists.update); // must login by default

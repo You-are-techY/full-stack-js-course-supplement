@@ -18,7 +18,7 @@ const TextInput = ({
 
   return (
     <div className="input-group">
-      <label htmlFor={name}> {label} {required && label ? <sup className="-required">*</sup> : null}</label>
+      <label htmlFor={name}> {label} {required ? <sup className="-required">*</sup> : null}</label>
       <input
         disabled={disabled}
         name={name}

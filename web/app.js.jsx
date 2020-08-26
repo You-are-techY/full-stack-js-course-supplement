@@ -16,8 +16,8 @@ import { render } from 'react-dom';
 // import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { createBrowserHistory as createHistory } from 'history';
 
+import { createBrowserHistory as createHistory } from 'history';
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 
 // instantiate tap event plugin
