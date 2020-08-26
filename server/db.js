@@ -18,6 +18,7 @@ module.exports = function(config) {
 };
 
 // Yote models are defined below
-let TodoList = require('./resources/todoList/TodoListModel');
+
 let Task = require('./resources/task/TaskModel');
+let TodoList = require('./resources/todoList/TodoListModel');
 let Comment = require('./resources/comment/CommentModel');

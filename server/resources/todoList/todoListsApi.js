@@ -15,11 +15,11 @@ module.exports = function(router, requireLogin, requireRole) {
 
   // - Read
   router.get('/api/todo-lists'                , requireRole('admin'), todoLists.list);
-  // router.get('/api/todo-lists/search'         , todoLists.search); //disabled by default
+  // router.get('/api/todo-lists/search'         , requireLogin(), todoLists.search); //disabled by default
   router.get('/api/todo-lists/by-:refKey/:refId*'  , requireLogin(), todoLists.listByRefs);
   router.get('/api/todo-lists/by-:refKey-list'    , requireLogin(), todoLists.listByValues);
   router.get('/api/todo-lists/default'        , requireLogin(), todoLists.getDefault);
-  // router.get('/api/todo-lists/schema'         , requireRole('admin'), todoLists.getSchema);
+  // router.get('/api/todo-lists/schema'         ,requireLogin(), requireRole('admin'), todoLists.getSchema);
   router.get('/api/todo-lists/:id'            , requireLogin(), todoLists.getById);
 
   // - Update

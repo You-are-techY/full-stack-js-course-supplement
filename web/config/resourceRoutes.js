@@ -15,6 +15,6 @@
 export { default as user } from '../resources/user/UserRouter.js.jsx';
 
 
-export { default as todoLists } from '../resources/todoList/TodoListRouter.js.jsx';
 export { default as tasks } from '../resources/task/TaskRouter.js.jsx';
+export { default as todoLists } from '../resources/todoList/TodoListRouter.js.jsx';
 export { default as comments } from '../resources/comment/CommentRouter.js.jsx';

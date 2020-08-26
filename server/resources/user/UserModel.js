@@ -136,7 +136,7 @@ function createDefaults() {
       User.create({
         firstName:'Erika'
         , lastName:'Smith'
-        , username:'erika.smithy@youaretechy.com'
+        , username:'erika.smith@youaretechy.com'
         , password_salt: password_salt
         , password_hash: password_hash
         , roles: []

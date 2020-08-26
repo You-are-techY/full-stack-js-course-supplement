@@ -15,6 +15,8 @@ The source code for the finished application can be found in the "production" br
 
 This is a production level application built with the full stack javascript framework, [Yote](https://fugitivelabs.github.io/yote/)
 
+__**NOTE:** You must be running Node version 10+.  See [NVM](https://github.com/nvm-sh/nvm/blob/master/README.md) for documentation on managing your Node versions.__
+
 To run, open two terminal windows.  In the first:
 ```bash 
 $ cd server 

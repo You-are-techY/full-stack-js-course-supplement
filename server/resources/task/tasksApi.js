@@ -14,12 +14,12 @@ module.exports = function(router, requireLogin, requireRole) {
   router.post('/api/tasks'               , requireLogin(), tasks.create); // must login by default
 
   // - Read
-  router.get('/api/tasks'                , requireRole('admin'), tasks.list);
-  // router.get('/api/tasks/search'         , tasks.search); //disabled by default
+  router.get('/api/tasks'                , requireLogin(), tasks.list);
+  // router.get('/api/tasks/search'         , requireLogin(), tasks.search); //disabled by default
   router.get('/api/tasks/by-:refKey/:refId*'  , requireLogin(), tasks.listByRefs);
   router.get('/api/tasks/by-:refKey-list'    , requireLogin(), tasks.listByValues);
-  router.get('/api/tasks/default'        , tasks.getDefault);
-  // router.get('/api/tasks/schema'         , requireRole('admin'), tasks.getSchema);
+  router.get('/api/tasks/default'        , requireLogin(), tasks.getDefault);
+  // router.get('/api/tasks/schema'         , requireLogin(), requireRole('admin'), tasks.getSchema);
   router.get('/api/tasks/:id'            , requireLogin(), tasks.getById);
 
   // - Update
